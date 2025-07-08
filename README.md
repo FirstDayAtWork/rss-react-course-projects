@@ -1,69 +1,107 @@
-# React + TypeScript + Vite
+# Rsschool React Course Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies 🪐
 
-Currently, two official plugins are available:
+**Framework:** [React](https://react.dev/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Language:** [TypeScript](https://www.typescriptlang.org/)
 
-## Expanding the ESLint configuration
+**Styles:** [CSS](https://www.w3schools.com/css/css_intro.asp)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Bundler:** [Vite](https://vite.dev/)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Tests:** [Vitest](https://vitest.dev/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+**API:** [Commercetools](https://commercetools.com/)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Code Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+
+**Git Hooks:** [Husky](https://typicode.github.io/husky/)
+
+## Scripts 🌑
+
+Opens the application in the development mode:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Creates a build directory with a production build of the application:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run build
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Allows to preview the production build locally:
+
+```bash
+npm run preview
+```
+
+Installs Husky:
+
+```bash
+npm run prepare
+```
+
+Lints the application with ESLint:
+
+```bash
+npm run lint
+```
+
+Fixes the linting errors and warnings:
+
+```bash
+npm run lint:fix
+```
+
+Formats the application with Prettier:
+
+```bash
+npm run format:fix
+```
+
+Checks CSS styles according to Stylelint rules:
+
+```bash
+npm run check-style
+```
+
+Fixes CSS styles according to Stylelint rules:
+
+```bash
+npm run fix-style
+```
+
+Checks the files before committing code changes:
+
+```bash
+npm run pre-commit
+```
+
+Runs Vitest tests:
+
+```bash
+npm run test
+```
+
+Reports Vitest tests coverage:
+
+```bash
+npm run coverage
+```
+
+## Set Up 🌕
+
+- Clone the repository to your computer using this command:
+
+```bash
+git clone https://github.com/FirstDayAtWork/rss-react-course-projects.git
+```
+
+- Install the dependencies by running the following command:
+
+```bash
+npm install
 ```
