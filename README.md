@@ -1,6 +1,6 @@
 # Rsschool React Course Project
 
-## Technologies 🪐
+## Technologies
 
 **Framework:** [React](https://react.dev/)
 
@@ -12,13 +12,13 @@
 
 **Tests:** [Vitest](https://vitest.dev/)
 
-**API:** [Commercetools](https://commercetools.com/)
+**API:** [DummyJson](https://dummyjson.com/)
 
 **Code Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
 
 **Git Hooks:** [Husky](https://typicode.github.io/husky/)
 
-## Scripts 🌑
+## Scripts
 
 Opens the application in the development mode:
 
@@ -92,7 +92,7 @@ Reports Vitest tests coverage:
 npm run coverage
 ```
 
-## Set Up 🌕
+## Set Up
 
 - Clone the repository to your computer using this command:
 
