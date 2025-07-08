@@ -43,10 +43,7 @@ export default tseslint.config(
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/explicit-function-return-type': 'error',
-      '@typescript-eslint/explicit-member-accessibility': [
-        'error',
-        { accessibility: 'explicit', overrides: { constructors: 'off' } },
-      ],
+      '@typescript-eslint/explicit-member-accessibility': "off",
       '@typescript-eslint/member-ordering': 'error',
       'class-methods-use-this': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
@@ -70,8 +67,6 @@ export default tseslint.config(
           },
         },
       ],
-      "no-unused-vars": "off",
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
 )
