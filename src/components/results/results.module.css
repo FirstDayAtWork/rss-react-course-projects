@@ -24,9 +24,17 @@
   padding: 20px;
   border: 1px solid var(--border-muted);
   border-top: 1px solid var(--highlight);
-  border-radius: 17px;
+  border-radius: 1rem;
 
-  background-color: var(--bg);
+  background: var(--gradient);
+
+  transition: all 0.5s ease;
+}
+
+.product-li:hover {
+  transform: scale(1.05);
+  background: var(--gradient-hover);
+  box-shadow: 0 0 20px var(--text);
 }
 
 .product-li-title {

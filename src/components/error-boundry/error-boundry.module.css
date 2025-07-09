@@ -1,0 +1,13 @@
+.error {
+  display: flex;
+  flex-flow: column wrap;
+
+  min-width: 350px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+
+  color: var(--bg);
+
+  background-color: var(--danger);
+}

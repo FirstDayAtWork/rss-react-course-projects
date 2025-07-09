@@ -28,19 +28,25 @@ class App extends Component {
     limit: 0,
     query: '',
     isLoading: true,
+    isError: false,
+    errorMessage: null,
   };
 
   componentDidMount(): void {
     (async (): Promise<void> => {
       const lsData = getLSData('query') ?? '';
       try {
-        const url = `https://dummyjson.com/products${
-          lsData ? '/search?q=' + lsData + '&limit=' + 10 : ''
-        }`;
+        const search = new URLSearchParams();
+        if (lsData) {
+          search.set('q', lsData.toString() ?? '');
+        }
+        search.set('limit', lsData ? '10' : '0');
+        const url = `https://dummyjson.com/products${search.has('q') ? '/search' : ''}?${search}`;
         const response = await fetch(url);
         const data: Products = await response.json();
         this.setState({ ...data, isLoading: false });
       } catch (error) {
+        this.setState({ isError: true, errorMessage: error });
         console.error('Error', error);
       }
     })();
@@ -55,11 +61,15 @@ class App extends Component {
       (async (): Promise<void> => {
         try {
           this.setState({ isLoading: true });
-          const url = `https://dummyjson.com/products/search?q=${this.state.query}&limit=${10}`;
+          const search = new URLSearchParams();
+          search.set('q', this.state.query);
+          search.set('limit', '10');
+          const url = `https://dummyjson.com/products/search?${search}`;
           const response = await fetch(url);
           const data: Products = await response.json();
           this.setState({ ...data, isLoading: false });
         } catch (error) {
+          this.setState({ isError: true, errorMessage: error });
           console.error('Error', error);
         }
       })();
@@ -75,7 +85,12 @@ class App extends Component {
       <>
         <h1>My App</h1>
         <Controls updateState={this.updateState} />
-        <Results products={this.state.products} isLoading={this.state.isLoading} />
+        <Results
+          products={this.state.products}
+          isLoading={this.state.isLoading}
+          isError={this.state.isError}
+          errorMessage={this.state.errorMessage}
+        />
       </>
     );
   }

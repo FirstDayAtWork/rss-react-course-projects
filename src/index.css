@@ -19,6 +19,8 @@
   --warning: oklch(70% 0.12 100deg);
   --success: oklch(70% 0.12 160deg);
   --info: oklch(70% 0.12 260deg);
+  --gradient: linear-gradient(0deg, var(--bg) 97%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
 }
 
 body {

@@ -47,7 +47,6 @@ export default tseslint.config(
       '@typescript-eslint/member-ordering': 'error',
       'class-methods-use-this': ['error', { "exceptMethods": ['render'] }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      
       'unicorn/no-array-callback-reference': 'off',
       'unicorn/no-array-for-each': 'off',
       'unicorn/no-array-reduce': 'off',
