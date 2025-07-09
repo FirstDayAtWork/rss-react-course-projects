@@ -3,6 +3,7 @@ import { Component } from 'react';
 import Controls from './controls/controls';
 import './app.css';
 import Results from './results/results';
+import { getLSData } from '../utility/local-storage';
 
 export type Product = {
   id: number;
@@ -26,15 +27,19 @@ class App extends Component {
     skip: 0,
     limit: 0,
     query: '',
+    isLoading: true,
   };
 
   componentDidMount(): void {
     (async (): Promise<void> => {
+      const lsData = getLSData('query') ?? '';
       try {
-        const url = 'https://dummyjson.com/products';
+        const url = `https://dummyjson.com/products${
+          lsData ? '/search?q=' + lsData + '&limit=' + 10 : ''
+        }`;
         const response = await fetch(url);
         const data: Products = await response.json();
-        this.setState({ ...data });
+        this.setState({ ...data, isLoading: false });
       } catch (error) {
         console.error('Error', error);
       }
@@ -42,13 +47,18 @@ class App extends Component {
   }
 
   componentDidUpdate(_previousProps: Readonly<object>, previousState: Products): void {
-    if (this.state.query.length > 0 && this.state.query !== previousState.query) {
+    if (
+      typeof this.state.query === 'string' &&
+      this.state.query.length > 0 &&
+      this.state.query !== previousState.query
+    ) {
       (async (): Promise<void> => {
         try {
+          this.setState({ isLoading: true });
           const url = `https://dummyjson.com/products/search?q=${this.state.query}&limit=${10}`;
           const response = await fetch(url);
           const data: Products = await response.json();
-          this.setState({ ...data });
+          this.setState({ ...data, isLoading: false });
         } catch (error) {
           console.error('Error', error);
         }
@@ -65,7 +75,7 @@ class App extends Component {
       <>
         <h1>My App</h1>
         <Controls updateState={this.updateState} />
-        <Results products={this.state.products} />
+        <Results products={this.state.products} isLoading={this.state.isLoading} />
       </>
     );
   }

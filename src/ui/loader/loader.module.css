@@ -1,0 +1,33 @@
+.circle {
+  transform: rotate(180deg);
+
+  animation: anicircle;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes anicircle {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+.show-loader {
+  display: block;
+}
