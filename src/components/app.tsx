@@ -40,7 +40,7 @@ class App extends Component {
         if (lsData) {
           search.set('q', lsData.toString() ?? '');
         }
-        search.set('limit', lsData ? '10' : '0');
+        search.set('limit', lsData ? '10' : '30');
         const url = `https://dummyjson.com/products${search.has('q') ? '/search' : ''}?${search}`;
         const response = await fetch(url);
         const data: Products = await response.json();
@@ -60,7 +60,7 @@ class App extends Component {
     ) {
       (async (): Promise<void> => {
         try {
-          this.setState({ isLoading: true });
+          this.setState({ isLoading: true, isError: false, errorMessage: null });
           const search = new URLSearchParams();
           search.set('q', this.state.query);
           search.set('limit', '10');
@@ -80,10 +80,19 @@ class App extends Component {
     this.setState({ query });
   };
 
+  handleErrorClick = (): void => {
+    const error = { name: 'Test Error', message: 'Error Example Text 123', stack: 'Sample' };
+    this.setState({
+      isError: true,
+      errorMessage: error,
+    });
+    console.error('Error', error);
+  };
+
   render(): JSX.Element {
     return (
       <>
-        <h1>My App</h1>
+        <h1>My React App</h1>
         <Controls updateState={this.updateState} />
         <Results
           products={this.state.products}
@@ -91,6 +100,9 @@ class App extends Component {
           isError={this.state.isError}
           errorMessage={this.state.errorMessage}
         />
+        <button className="show-error-btn" onClick={this.handleErrorClick} type="button">
+          Show Error
+        </button>
       </>
     );
   }

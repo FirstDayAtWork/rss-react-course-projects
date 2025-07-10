@@ -29,13 +29,17 @@ export default class Results extends Component<ResultProps> {
       }
       return (
         <>
-          {products.map((item) => (
-            <li key={item.id + '.'} className={classes['product-li']}>
-              <img src={item.images[0]} alt="Product Image" width={150} height={150} />
-              <span className={classes['product-li-title']}>{item.title}</span>
-              <p className={classes['product-li-description']}>{item.description}</p>
-            </li>
-          ))}
+          {products.length > 0 ? (
+            products.map((item) => (
+              <li key={item.id + '.'} className={classes['product-li']}>
+                <img src={item.images[0]} alt="Product Image" width={150} height={150} />
+                <span className={classes['product-li-title']}>{item.title}</span>
+                <p className={classes['product-li-description']}>{item.description}</p>
+              </li>
+            ))
+          ) : (
+            <h2>No Results Found</h2>
+          )}
         </>
       );
     };
