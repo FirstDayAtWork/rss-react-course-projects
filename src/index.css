@@ -27,11 +27,3 @@ body {
   min-height: 100vh;
   background-color: var(--bg-dark);
 }
-
-h1 {
-  text-align: center;
-}
-
-li {
-  list-style-type: none;
-}
