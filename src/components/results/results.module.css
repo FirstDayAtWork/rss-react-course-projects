@@ -1,0 +1,13 @@
+.product-ul {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 1440px;
+  margin: auto;
+  padding: 20px;
+
+  background-color: var(--bg-dark);
+}
