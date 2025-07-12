@@ -4,6 +4,7 @@ import Controls from './controls/controls';
 import './app.css';
 import Results from './results/results';
 import { getLSData } from '../utility/local-storage';
+import Header from './header/header';
 
 export type Product = {
   id: number;
@@ -40,7 +41,7 @@ class App extends Component {
         if (lsData) {
           search.set('q', lsData.toString() ?? '');
         }
-        search.set('limit', lsData ? '10' : '30');
+        search.set('limit', lsData ? '10' : '0');
         const url = `https://dummyjson.com/products${search.has('q') ? '/search' : ''}?${search}`;
         const response = await fetch(url);
         const data: Products = await response.json();
@@ -92,7 +93,7 @@ class App extends Component {
   render(): JSX.Element {
     return (
       <>
-        <h1>My React App</h1>
+        <Header />
         <Controls updateState={this.updateState} />
         <Results
           products={this.state.products}

@@ -27,11 +27,10 @@ export default class ErrorBoundry extends Component<ChildrenProps> {
         {this.state.errorInfo ? (
           <div className={classes.error}>
             <h2>Something went wrong!</h2>
-            <p>
-              {this.state.error && this.state.error.toString()}
-              <br />
-              {this.state.errorInfo.componentStack}
-            </p>
+            <p>{this.state.error && this.state.error.toString()}</p>
+            <pre>
+              <code>{this.state.errorInfo.componentStack}</code>
+            </pre>
           </div>
         ) : (
           this.props.children

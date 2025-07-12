@@ -14,7 +14,9 @@ export default class ErrorMessage extends Component<ErrorMessageProps> {
       <div className={classes.error}>
         <h2>{error?.name}</h2>
         <h3>{error?.message}</h3>
-        <p>{error?.stack}</p>
+        <pre>
+          <code>{error?.stack}</code>
+        </pre>
       </div>
     );
   }
