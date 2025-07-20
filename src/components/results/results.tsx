@@ -37,7 +37,9 @@ export default class Results extends Component<ResultProps> {
 
     return (
       <>
-        <ul className={classes['product-ul']}>{condition()}</ul>
+        <ul className={classes['product-ul']} id="product-ul">
+          {condition()}
+        </ul>
       </>
     );
   }

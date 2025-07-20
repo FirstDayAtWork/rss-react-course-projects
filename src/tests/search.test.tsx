@@ -18,7 +18,7 @@ describe('rendering', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('should Displays previously saved search term from localStorage on mount', () => {
+  it('should displays previously saved search term from localStorage on mount', () => {
     const mockState = vi.fn();
     setLSData('query', 'some text');
     const { container } = render(<Controls updateState={mockState} />);
@@ -26,7 +26,7 @@ describe('rendering', () => {
     expect(input?.value).toBe('some text');
   });
 
-  it('should Displays empty input if no data in localstorage', () => {
+  it('should displays empty input if no data in localstorage', () => {
     const mockState = vi.fn();
     localStorage.removeItem('query');
     const { container } = render(<Controls updateState={mockState} />);
@@ -47,7 +47,7 @@ describe('user interaction', () => {
     }
   });
 
-  it('should Saves search term to localStorage when search button is clicked', () => {
+  it('should saves search term to localStorage when search button is clicked', () => {
     const mockState = vi.fn();
     const { container } = render(<Controls updateState={mockState} />);
     const input = container.querySelector<HTMLInputElement>('#search-field');
@@ -63,7 +63,7 @@ describe('user interaction', () => {
 });
 
 describe('LocalStorage Integration', () => {
-  it('Overwrites existing localStorage value when new search is performed', () => {
+  it('should overwrites existing localStorage value when new search is performed', () => {
     const mockState = vi.fn();
     const { container } = render(<Controls updateState={mockState} />);
     const input = container.querySelector<HTMLInputElement>('#search-field');
