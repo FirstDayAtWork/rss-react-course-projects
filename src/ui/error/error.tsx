@@ -11,7 +11,7 @@ export default class ErrorMessage extends Component<ErrorMessageProps> {
     const { error } = this.props;
 
     return (
-      <div className={classes.error}>
+      <div className={classes.error} id="error">
         <h2>{error?.name}</h2>
         <h3>{error?.message}</h3>
         <pre>

@@ -6,11 +6,16 @@ export class MockClass extends Component {
     query: '',
   };
 
-  updateState = (query: string): void => {
-    this.setState({ query });
+  throwError = (): void => {
+    throw new Error('Mock Error Example');
   };
 
   render(): JSX.Element {
-    return <h1>Hello Mock!</h1>;
+    return (
+      <>
+        <h1>Hello Mock!</h1>
+        {this.throwError()}
+      </>
+    );
   }
 }

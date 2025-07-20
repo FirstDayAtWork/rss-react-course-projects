@@ -101,7 +101,12 @@ class App extends Component {
           isError={this.state.isError}
           errorMessage={this.state.errorMessage}
         />
-        <button className="show-error-btn" onClick={this.handleErrorClick} type="button">
+        <button
+          className="show-error-btn"
+          id="show-error-btn"
+          onClick={this.handleErrorClick}
+          type="button"
+        >
           Show Error
         </button>
       </>
