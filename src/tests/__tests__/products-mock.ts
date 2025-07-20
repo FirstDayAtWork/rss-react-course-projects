@@ -1,6 +1,6 @@
 import type { Product } from '../../components/app';
 
-const MockProduct1: Product = {
+export const MockProduct1: Product = {
   id: 1,
   title: 'Some Title',
   images: ['image.jpg'],
