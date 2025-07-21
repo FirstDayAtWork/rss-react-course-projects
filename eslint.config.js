@@ -45,7 +45,7 @@ export default tseslint.config(
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-member-accessibility': "off",
       '@typescript-eslint/member-ordering': 'error',
-      'class-methods-use-this': ['error', { "exceptMethods": ['render'] }],
+      'class-methods-use-this': ['error', { "exceptMethods": ['render', 'throwError'] }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       'unicorn/no-array-callback-reference': 'off',
       'unicorn/no-array-for-each': 'off',

@@ -25,7 +25,7 @@ export default class ErrorBoundry extends Component<ChildrenProps> {
     return (
       <>
         {this.state.errorInfo ? (
-          <div className={classes.error}>
+          <div className={classes.error} id="fallback">
             <h2>Something went wrong!</h2>
             <p>{this.state.error && this.state.error.toString()}</p>
             <pre>

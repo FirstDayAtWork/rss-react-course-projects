@@ -37,7 +37,12 @@ export default class Controls extends Component<ControlsProps> {
           id="search-field"
           placeholder="Type here..."
         />
-        <button className={classes['control-search-btn']} onClick={this.handleClick} type="button">
+        <button
+          className={classes['control-search-btn']}
+          onClick={this.handleClick}
+          type="button"
+          id="search-btn"
+        >
           Search
         </button>
       </div>
