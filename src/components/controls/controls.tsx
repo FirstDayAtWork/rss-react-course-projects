@@ -1,5 +1,4 @@
-import type { ChangeEvent, JSX } from 'react';
-import { Component } from 'react';
+import { useEffect, useState, type ChangeEvent, type JSX } from 'react';
 import classes from './controls.module.css';
 import { getLSData, setLSData } from '../../utility/local-storage';
 
@@ -7,45 +6,43 @@ type ControlsProps = {
   updateState: (query: string) => void;
 };
 
-export default class Controls extends Component<ControlsProps> {
-  state = {
-    value: '',
-  };
+export default function Controls(props: ControlsProps): JSX.Element {
+  const { updateState } = props;
 
-  componentDidMount(): void {
-    const lsData = getLSData('query') ?? '';
-    this.setState({ value: lsData });
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    const lsData: string = getLSData('query') ?? '';
+    setValue(lsData);
+  }, []);
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+    setValue(event?.target.value.trim());
   }
 
-  handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ value: event?.target.value.trim() });
-  };
-
-  handleClick = (): void => {
-    this.props.updateState(this.state.value);
-    setLSData('query', this.state.value);
-  };
-
-  render(): JSX.Element {
-    return (
-      <div className={classes['controls']}>
-        <input
-          className={classes['control-input']}
-          value={this.state.value}
-          onChange={this.handleChange}
-          type="search"
-          id="search-field"
-          placeholder="Type here..."
-        />
-        <button
-          className={classes['control-search-btn']}
-          onClick={this.handleClick}
-          type="button"
-          id="search-btn"
-        >
-          Search
-        </button>
-      </div>
-    );
+  function handleClick(): void {
+    updateState(value);
+    setLSData('query', value);
   }
+
+  return (
+    <div className={classes['controls']}>
+      <input
+        className={classes['control-input']}
+        value={value}
+        onChange={handleChange}
+        type="search"
+        id="search-field"
+        placeholder="Type here..."
+      />
+      <button
+        className={classes['control-search-btn']}
+        onClick={handleClick}
+        type="button"
+        id="search-btn"
+      >
+        Search
+      </button>
+    </div>
+  );
 }

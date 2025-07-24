@@ -1,5 +1,4 @@
 import type { JSX } from 'react';
-import { Component } from 'react';
 import type { Product } from '../app';
 import classes from './results.module.css';
 import Loader from '../../ui/loader/loader';
@@ -13,34 +12,32 @@ type ResultProps = {
   errorMessage: Error | null;
 };
 
-export default class Results extends Component<ResultProps> {
-  render(): JSX.Element {
-    const { products, isLoading, isError, errorMessage } = this.props;
+export default function Results(props: ResultProps): JSX.Element {
+  const { products, isLoading, isError, errorMessage } = props;
 
-    const condition = (): JSX.Element => {
-      if (isError) {
-        return <ErrorMessage error={errorMessage} />;
-      }
-      if (isLoading) {
-        return <Loader />;
-      }
-      return (
-        <>
-          {products.length > 0 ? (
-            products.map((item) => <ProductItem key={item.id + '.'} item={item} />)
-          ) : (
-            <h2>No Results Found</h2>
-          )}
-        </>
-      );
-    };
-
+  const condition = (): JSX.Element => {
+    if (isError) {
+      return <ErrorMessage error={errorMessage} />;
+    }
+    if (isLoading) {
+      return <Loader />;
+    }
     return (
       <>
-        <ul className={classes['product-ul']} id="product-ul">
-          {condition()}
-        </ul>
+        {products.length > 0 ? (
+          products.map((item) => <ProductItem key={item.id + '.'} item={item} />)
+        ) : (
+          <h2>No Results Found</h2>
+        )}
       </>
     );
-  }
+  };
+
+  return (
+    <>
+      <ul className={classes['product-ul']} id="product-ul">
+        {condition()}
+      </ul>
+    </>
+  );
 }
