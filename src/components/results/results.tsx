@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import type { Product } from '../app';
+import type { Product } from '../../pages/home/home';
 import classes from './results.module.css';
 import Loader from '../../ui/loader/loader';
 import ErrorMessage from '../../ui/error/error';

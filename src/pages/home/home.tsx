@@ -2,6 +2,9 @@ import { useEffect, useState, type JSX } from 'react';
 import Controls from '../../components/controls/controls';
 import Results from '../../components/results/results';
 import { getLSData } from '../../utility/local-storage';
+import Pagination from '../../components/pagination/pagination';
+import { useSearchParams } from 'react-router';
+import { queryMath } from '../../utility/query-math';
 
 export type Product = {
   id: number;
@@ -18,7 +21,7 @@ export type Products = {
   query: string;
 };
 
-type AppState = {
+export type AppState = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: Error | null;
@@ -29,43 +32,25 @@ export default function Home(): JSX.Element {
     products: [{ id: 0, title: '', images: [''], description: '' }],
     total: 0,
     skip: 0,
-    limit: 0,
+    limit: 10,
     query: '',
     isLoading: true,
     isError: false,
     errorMessage: null,
   });
 
-  useEffect(() => {
-    (async (): Promise<void> => {
-      const lsData = getLSData('query') ?? '';
-      try {
-        const search = new URLSearchParams();
-        if (lsData) {
-          search.set('q', lsData.toString() ?? '');
-        }
-        search.set('limit', lsData ? '10' : '0');
-        const url = `https://dummyjson.com/products${search.has('q') ? '/search' : ''}?${search}`;
-        const response = await fetch(url);
-        const data: Products = await response.json();
-        setState({ ...state, ...data, isLoading: false });
-      } catch (error) {
-        if (error instanceof Error) {
-          setState({ ...state, isError: true, errorMessage: error });
-        }
-        console.error('Error', error);
-      }
-    })();
-  }, []);
+  const [page, setPage] = useSearchParams();
 
   useEffect(() => {
-    if (typeof state.query === 'string' && state.query.length > 0) {
+    if (typeof state.query === 'string') {
       (async (): Promise<void> => {
+        const lsData = getLSData('query') ?? '';
         try {
           setState({ ...state, isLoading: true, isError: false, errorMessage: null });
           const search = new URLSearchParams();
-          search.set('q', state.query);
+          search.set('q', lsData ? `${lsData}` : state.query);
           search.set('limit', '10');
+          search.set('skip', queryMath(page, setPage));
           const url = `https://dummyjson.com/products/search?${search}`;
           const response = await fetch(url);
           const data: Products = await response.json();
@@ -78,10 +63,11 @@ export default function Home(): JSX.Element {
         }
       })();
     }
-  }, [state.query]);
+  }, [state.query, page.get('page')]);
 
   function updateState(query: string): void {
     setState({ ...state, query });
+    setPage({ page: '1' });
   }
 
   function handleErrorClick(): void {
@@ -96,6 +82,7 @@ export default function Home(): JSX.Element {
 
   return (
     <>
+      <Pagination total={state.total} setPage={setPage} />
       <Controls updateState={updateState} />
       <Results
         products={state.products}
