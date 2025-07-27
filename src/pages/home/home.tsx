@@ -82,7 +82,6 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Pagination total={state.total} setPage={setPage} />
       <Controls updateState={updateState} />
       <Results
         products={state.products}
@@ -90,6 +89,7 @@ export default function Home(): JSX.Element {
         isError={state.isError}
         errorMessage={state.errorMessage}
       />
+      <Pagination total={state.total} setPage={setPage} />
       <button
         className="show-error-btn"
         id="show-error-btn"

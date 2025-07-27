@@ -16,28 +16,21 @@ type ResultProps = {
 export default function Results(props: ResultProps): JSX.Element {
   const { products, isLoading, isError, errorMessage } = props;
 
-  const condition = (): JSX.Element => {
-    if (isError) {
-      return <ErrorMessage error={errorMessage} />;
-    }
-    if (isLoading) {
-      return <Loader />;
-    }
-    return (
-      <>
+  if (isError) {
+    return <ErrorMessage error={errorMessage} />;
+  }
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
+    <div className={classes['product-wrapper']}>
+      <ul className={classes['product-ul']} id="product-ul">
         {products.length > 0 ? (
           products.map((item) => <ProductItem key={item.id + '.'} item={item} />)
         ) : (
           <h2>No Results Found</h2>
         )}
-      </>
-    );
-  };
-
-  return (
-    <div className={classes['product-wrapper']}>
-      <ul className={classes['product-ul']} id="product-ul">
-        {condition()}
       </ul>
       <Outlet />
     </div>

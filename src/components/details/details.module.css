@@ -1,0 +1,82 @@
+.details-wrapper {
+  display: flex;
+  flex: 1;
+  align-items: start;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.details {
+  position: relative;
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 500px;
+  max-width: 500px;
+  height: 650px;
+  padding: 20px;
+  border: 1px solid var(--border-muted);
+  border-top: 1px solid var(--highlight);
+  border-radius: 1rem;
+
+  text-decoration: none;
+
+  background: var(--gradient-hover);
+
+  transition: all 0.5s ease;
+}
+
+.close-details-btn {
+  cursor: pointer;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+
+  background-color: inherit;
+
+  transition: all 0.5s ease;
+}
+
+.close-details-btn:hover {
+  border: 1px solid var(--border);
+}
+
+.close-details-btn::after {
+  content: url('/icons/cross_48.svg');
+  width: 48px;
+  height: 48px;
+}
+
+.details-title {
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.details-description {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.detail-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+
+  min-width: 100%;
+  padding: 0;
+}
