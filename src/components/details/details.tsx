@@ -46,6 +46,10 @@ export default function Details(): JSX.Element {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
+        if (details && Number.isNaN(+details)) {
+          navigate(`${details}`);
+          return;
+        }
         setLoading(true);
         const url = `https://dummyjson.com/products/${details}`;
         const response = await fetch(url);

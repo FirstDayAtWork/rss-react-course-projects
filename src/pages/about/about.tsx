@@ -14,7 +14,7 @@ export default function About(): JSX.Element {
         </a>
         <div className={classes['footer-year']}>2025</div>
         <div className={classes['footer-logo']}></div>
-        <a className={classes['footer-school-link']} href="https://rs.school/courses/javascript">
+        <a className={classes['footer-school-link']} href="https://rs.school/courses/reactjs">
           RS School
         </a>
       </footer>
