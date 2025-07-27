@@ -4,6 +4,7 @@ import classes from './results.module.css';
 import Loader from '../../ui/loader/loader';
 import ErrorMessage from '../../ui/error/error';
 import ProductItem from './item';
+import { Outlet } from 'react-router';
 
 type ResultProps = {
   products: Product[];
@@ -34,10 +35,11 @@ export default function Results(props: ResultProps): JSX.Element {
   };
 
   return (
-    <>
+    <div className={classes['product-wrapper']}>
       <ul className={classes['product-ul']} id="product-ul">
         {condition()}
       </ul>
-    </>
+      <Outlet />
+    </div>
   );
 }
