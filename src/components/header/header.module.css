@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 20px;
+}
+
+.navbar {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: end;
+
+  width: 300px;
+}
+
+.navbar-item {
+  width: 90px;
+  padding: 12px 14px;
+  font-size: 1.5rem;
+  text-align: center;
+}

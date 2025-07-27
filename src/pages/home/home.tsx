@@ -70,29 +70,11 @@ export default function Home(): JSX.Element {
     setPage({ page: '1' });
   }
 
-  function handleErrorClick(): void {
-    const error = { name: 'Test Error', message: 'Error Example Text 123', stack: 'Sample' };
-    setState({
-      ...state,
-      isError: true,
-      errorMessage: error,
-    });
-    console.error('Error', error);
-  }
-
   return (
     <>
       <Controls updateState={updateState} />
       <Results products={state.products} isLoading={state.isLoading} />
       <Pagination total={state.total} setPage={setPage} />
-      <button
-        className="show-error-btn"
-        id="show-error-btn"
-        onClick={handleErrorClick}
-        type="button"
-      >
-        Show Error
-      </button>
     </>
   );
 }
