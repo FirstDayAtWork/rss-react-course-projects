@@ -2,23 +2,17 @@ import type { JSX } from 'react';
 import type { Product } from '../../pages/home/home';
 import classes from './results.module.css';
 import Loader from '../../ui/loader/loader';
-import ErrorMessage from '../../ui/error/error';
 import ProductItem from './item';
 import { Outlet } from 'react-router';
 
 type ResultProps = {
   products: Product[];
   isLoading: boolean;
-  isError: boolean;
-  errorMessage: Error | null;
 };
 
 export default function Results(props: ResultProps): JSX.Element {
-  const { products, isLoading, isError, errorMessage } = props;
+  const { products, isLoading } = props;
 
-  if (isError) {
-    return <ErrorMessage error={errorMessage} />;
-  }
   if (isLoading) {
     return <Loader />;
   }

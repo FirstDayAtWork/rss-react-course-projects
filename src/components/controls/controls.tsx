@@ -1,6 +1,6 @@
-import { useEffect, useState, type ChangeEvent, type JSX } from 'react';
+import { useState, type ChangeEvent, type JSX } from 'react';
 import classes from './controls.module.css';
-import { getLSData, setLSData } from '../../utility/local-storage';
+import { useStorage } from '../../hooks/use-storage';
 
 type ControlsProps = {
   updateState: (query: string) => void;
@@ -11,10 +11,7 @@ export default function Controls(props: ControlsProps): JSX.Element {
 
   const [value, setValue] = useState('');
 
-  useEffect(() => {
-    const lsData: string = getLSData('query') ?? '';
-    setValue(lsData);
-  }, []);
+  const [, setLSValue] = useStorage('', 'query');
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     setValue(event?.target.value.trim());
@@ -22,7 +19,7 @@ export default function Controls(props: ControlsProps): JSX.Element {
 
   function handleClick(): void {
     updateState(value);
-    setLSData('query', value);
+    setLSValue(value);
   }
 
   return (
