@@ -8,6 +8,14 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['**/*.config.js'],
     coverage: {
+      provider: 'v8',
+      enabled: true,
+      thresholds: {
+        statements: 80,
+        branches: 50,
+        functions: 50,
+        lines: 50,
+      },
       include: ['src/**/*.{js,jsx,ts,tsx}'],
       exclude: [
         'src/**/*.test.{js,jsx,ts,tsx}',

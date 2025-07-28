@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5px;
+  align-items: center;
+  justify-content: start;
+
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.pagination-btn {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border: none;
+  border-radius: 7px;
+
+  font-size: 1.2rem;
+  color: var(--info);
+
+  background-color: var(--bg-dark);
+}
+
+.pagination-btn:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--border-muted);
+}

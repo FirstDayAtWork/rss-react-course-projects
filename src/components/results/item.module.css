@@ -1,4 +1,6 @@
 .product-li {
+  cursor: pointer;
+
   display: flex;
   flex-flow: column nowrap;
   gap: 10px;
@@ -11,6 +13,8 @@
   border: 1px solid var(--border-muted);
   border-top: 1px solid var(--highlight);
   border-radius: 1rem;
+
+  text-decoration: none;
 
   background: var(--gradient);
 
