@@ -40,14 +40,11 @@ export default function Details(): JSX.Element {
   const navigate = useNavigate();
   const { details } = useParams();
   const location = useLocation();
-  const queries = new URLSearchParams(location.search);
-  const page = queries.get('page');
 
   useEffect(() => {
     (async (): Promise<void> => {
       try {
         if (details && Number.isNaN(+details)) {
-          navigate(`${details}`);
           return;
         }
         setLoading(true);
@@ -63,7 +60,7 @@ export default function Details(): JSX.Element {
   }, [details]);
 
   function handleCloseEvent(): void {
-    navigate({ pathname: '/', search: `?page=${page}` });
+    navigate(`/${location.search}`);
     scrollEvent({ side: 'top', value: 0, behavior: 'smooth' });
   }
 

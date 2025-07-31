@@ -1,7 +1,6 @@
 import { useEffect, useState, type JSX } from 'react';
 import Controls from '../../components/controls/controls';
 import Results from '../../components/results/results';
-import { getLSData } from '../../utility/local-storage';
 import Pagination from '../../components/pagination/pagination';
 import { useSearchParams } from 'react-router';
 import { queryMath } from '../../utility/query-math';
@@ -42,27 +41,24 @@ export default function Home(): JSX.Element {
   const [page, setPage] = useSearchParams();
 
   useEffect(() => {
-    if (typeof state.query === 'string') {
-      (async (): Promise<void> => {
-        const lsData = getLSData('query') ?? '';
-        try {
-          setState({ ...state, isLoading: true, isError: false, errorMessage: null });
-          const search = new URLSearchParams();
-          search.set('q', lsData ? `${lsData}` : state.query);
-          search.set('limit', '10');
-          search.set('skip', queryMath(page, setPage));
-          const url = `https://dummyjson.com/products/search?${search}`;
-          const response = await fetch(url);
-          const data: Products = await response.json();
-          setState({ ...state, ...data, isLoading: false });
-        } catch (error) {
-          if (error instanceof Error) {
-            setState({ ...state, isError: true, errorMessage: error });
-          }
-          console.error('Error', error);
+    (async (): Promise<void> => {
+      try {
+        setState({ ...state, isLoading: true, isError: false, errorMessage: null });
+        const search = new URLSearchParams();
+        search.set('q', state.query);
+        search.set('limit', '10');
+        search.set('skip', queryMath(page, setPage));
+        const url = `https://dummyjson.com/products/search?${search}`;
+        const response = await fetch(url);
+        const data: Products = await response.json();
+        setState({ ...state, ...data, isLoading: false });
+      } catch (error) {
+        if (error instanceof Error) {
+          setState({ ...state, isLoading: true, isError: true, errorMessage: error });
         }
-      })();
-    }
+        console.error('Error', error);
+      }
+    })();
   }, [state.query, page.get('page')]);
 
   function updateState(query: string): void {

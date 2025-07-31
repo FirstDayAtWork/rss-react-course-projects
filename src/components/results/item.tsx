@@ -13,11 +13,9 @@ export default function ProductItem(props: ItemProps): JSX.Element {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const queries = new URLSearchParams(location.search);
-  const page = queries.get('page');
 
   function handleClick(): void {
-    navigate({ pathname: `${item.id}`, search: `?page=${page}` });
+    navigate(`${item.id}${location.search}`);
     scrollEvent({ side: 'top', value: 0, behavior: 'smooth' });
   }
 

@@ -9,9 +9,8 @@ type ControlsProps = {
 export default function Controls(props: ControlsProps): JSX.Element {
   const { updateState } = props;
 
-  const [value, setValue] = useState('');
-
-  const [, setLSValue] = useStorage('', 'query');
+  const [lsValue, setLSValue] = useStorage('', 'query');
+  const [value, setValue] = useState(lsValue);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     setValue(event?.target.value.trim());
