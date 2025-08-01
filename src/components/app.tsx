@@ -13,9 +13,10 @@ export default function App(): JSX.Element {
       <Header />
       <Routes>
         <Route path="/" element={<Home />}>
-          <Route path="/:details" element={<Details />} />
+          <Route path=":details" element={<Details />} />
         </Route>
         <Route path="about" element={<About />} />
+        <Route path="nopage" element={<NoPage />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>

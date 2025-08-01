@@ -45,6 +45,7 @@ export default function Details(): JSX.Element {
     (async (): Promise<void> => {
       try {
         if (details && Number.isNaN(+details)) {
+          navigate('/nopage');
           return;
         }
         setLoading(true);
@@ -53,6 +54,10 @@ export default function Details(): JSX.Element {
         const data: ProductDetails = await response.json();
         setData(data);
         setLoading(false);
+        if (response.status === 404) {
+          navigate('/nopage');
+          return;
+        }
       } catch (error) {
         console.error('Error', error);
       }
