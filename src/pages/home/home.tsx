@@ -5,6 +5,7 @@ import Pagination from '../../components/pagination/pagination';
 import { useSearchParams } from 'react-router';
 import { queryMath } from '../../utility/query-math';
 import CheckBoard from '../../components/checkboard/checkboard';
+import type { ProductDetails } from '../../components/details/details';
 
 export type Product = {
   id: number;
@@ -14,7 +15,7 @@ export type Product = {
 };
 
 export type Products = {
-  products: Product[];
+  products: ProductDetails[];
   total: number;
   skip: number;
   limit: number;
@@ -29,7 +30,7 @@ export type AppState = {
 
 export default function Home(): JSX.Element {
   const [state, setState] = useState<AppState>({
-    products: [{ id: 0, title: '', images: [''], description: '' }],
+    products: [],
     total: 0,
     skip: 0,
     limit: 10,

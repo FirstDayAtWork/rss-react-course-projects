@@ -27,17 +27,17 @@ describe('rendering', () => {
     expect(button).toBeInTheDocument();
   });
 
-  // it('should displays previously saved search term from localStorage on mount', () => {
-  //   const mockState = vi.fn();
-  //   setLSData('query', 'some text');
-  //   const { container } = render(
-  //     <MemoryRouter>
-  //       <Controls updateState={mockState} />
-  //     </MemoryRouter>,
-  //   );
-  //   const input = container.querySelector<HTMLInputElement>('#search-field');
-  //   expect(input?.value).toBe('some text');
-  // });
+  it('should displays previously saved search term from localStorage on mount', () => {
+    const mockState = vi.fn();
+    setLSData('query', 'some text');
+    const { container } = render(
+      <MemoryRouter>
+        <Controls updateState={mockState} />
+      </MemoryRouter>,
+    );
+    const input = container.querySelector<HTMLInputElement>('#search-field');
+    expect(input?.value).toBe('some text');
+  });
 
   it('should displays empty input if no data in localstorage', () => {
     const mockState = vi.fn();

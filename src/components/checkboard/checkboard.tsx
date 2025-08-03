@@ -20,7 +20,7 @@ export default function CheckBoard(): JSX.Element {
 
     if (linkReference.current) {
       linkReference.current.href = url;
-      linkReference.current.download = `${items.length}_items`;
+      linkReference.current.download = `${items.length}_items.csv`;
       linkReference.current.click();
     }
   }
