@@ -47,6 +47,7 @@ export default function ProductItem(props: ItemProps): JSX.Element {
         type="checkbox"
         name="product-li-checkbox"
         id={`product-li-checkbox${item.id}`}
+        title="Select item"
       />
       {item.images[0] && <img src={item.images[0]} alt="Product Image" width={150} height={150} />}
       <span className={classes['product-li-title']}>{item.title}</span>

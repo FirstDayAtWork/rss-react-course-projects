@@ -4,6 +4,7 @@ import Results from '../../components/results/results';
 import Pagination from '../../components/pagination/pagination';
 import { useSearchParams } from 'react-router';
 import { queryMath } from '../../utility/query-math';
+import CheckBoard from '../../components/checkboard/checkboard';
 
 export type Product = {
   id: number;
@@ -71,6 +72,7 @@ export default function Home(): JSX.Element {
       <Controls updateState={updateState} />
       <Results products={state.products} isLoading={state.isLoading} />
       <Pagination total={state.total} setPage={setPage} />
+      <CheckBoard />
     </>
   );
 }

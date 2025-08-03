@@ -11,7 +11,7 @@ export type ItemSlice = {
 export const useItemSlice: StateCreator<ItemSlice> = (set) => ({
   items: [],
   setItem: (item): void => {
-    set((state) => ({ items: [...state.items, { ...item, isChecked: false }] }));
+    set((state) => ({ items: [...state.items, item] }));
   },
   removeItem: (id): void => {
     set((state) => ({ items: state.items.filter((element) => element.id !== id) }));
