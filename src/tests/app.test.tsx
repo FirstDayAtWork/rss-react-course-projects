@@ -11,14 +11,4 @@ describe('Test API', () => {
       expect(screen.getByText('Essence Mascara Lash Princess')).toBeInTheDocument();
     });
   });
-
-  // it('Should Display Fetched Data on Screen based on Local Storage Data', async () => {
-  //   setLSData('query', 'powder');
-
-  //   render(<ErrorBoundry children={<App />} />);
-
-  //   await waitFor(() => {
-  //     expect(screen.getByText(/Protein Powder/i)).toBeInTheDocument();
-  //   });
-  // });
 });

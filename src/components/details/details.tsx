@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import type { Product } from '../../pages/home/home';
 import classes from './details.module.css';
 import Detail from './detail';
-import { scrollEvent } from '../../utility/scroll-event';
 import Loader from '../../ui/loader/loader';
 
 const categories: (keyof ProductDetails)[] = ['brand', 'category', 'stock', 'price', 'dimensions'];
@@ -66,7 +65,10 @@ export default function Details(): JSX.Element {
 
   function handleCloseEvent(): void {
     navigate(`/${location.search}`);
-    scrollEvent({ side: 'top', value: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   return (

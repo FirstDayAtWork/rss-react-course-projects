@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import classes from './pagination.module.css';
 import { setArray } from '../../utility/set-array';
 import type { SetURLSearchParams } from 'react-router';
-import { scrollEvent } from '../../utility/scroll-event';
 
 type PaginationProps = {
   total: number;
@@ -22,7 +21,10 @@ export default function Pagination(props: PaginationProps): JSX.Element {
   function handleClick(event: MouseEvent<HTMLButtonElement>): void {
     if (event.target instanceof HTMLElement) {
       setPage({ page: event.target.dataset.value ?? '' });
-      scrollEvent({ side: 'top', value: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
   }
 

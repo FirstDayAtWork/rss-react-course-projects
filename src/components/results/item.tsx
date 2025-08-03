@@ -1,7 +1,6 @@
 import type { ChangeEvent, MouseEvent, JSX } from 'react';
 import classes from './item.module.css';
 import { useLocation, useNavigate } from 'react-router';
-import { scrollEvent } from '../../utility/scroll-event';
 import { useItemStore } from '../../stores/store';
 import type { ProductDetails } from '../details/details';
 
@@ -26,7 +25,10 @@ export default function ProductItem(props: ItemProps): JSX.Element {
     }
 
     navigate(`${item.id}${location.search}`);
-    scrollEvent({ side: 'top', value: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   function handleCheckBoxCheck(event: ChangeEvent<HTMLInputElement>): void {
