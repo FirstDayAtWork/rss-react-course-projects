@@ -13,7 +13,7 @@ export default function Theme(): JSX.Element {
 
   return (
     <div>
-      <button className={classes['theme-btn']} onClick={handleClick}>
+      <button className={classes['theme-btn']} onClick={handleClick} title="Change theme">
         <img
           className={context.theme === 'light' ? classes.hide : ''}
           key="dark"
