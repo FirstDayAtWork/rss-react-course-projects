@@ -2,7 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+
   padding: 0 20px;
+
+  text-wrap: nowrap;
+
+  box-shadow: var(--shadow);
+}
+
+.header > h2 {
+  color: var(--text);
 }
 
 .navbar {
@@ -17,6 +26,15 @@
 .navbar-item {
   width: 90px;
   padding: 12px 14px;
+
   font-size: 1.5rem;
+  color: var(--text-muted);
   text-align: center;
+  text-decoration: none;
+
+  transition: var(--transition);
+}
+
+.navbar-item:hover {
+  color: var(--text);
 }

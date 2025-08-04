@@ -21,6 +21,31 @@
   --info: oklch(70% 0.12 260deg);
   --gradient: linear-gradient(0deg, var(--bg) 97%, var(--bg-light));
   --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+  --border-card: solid 1px var(--border-muted);
+  --shadow: 0px 2px 2px oklch(0% 0 0deg / 20%), 0px 4px 4px oklch(0% 0 0deg / 10%);
+  --transition: all 0.5s ease;
+}
+
+:root.light {
+  --bg-dark: oklch(92% 0.06 297deg);
+  --bg: oklch(96% 0.06 297deg);
+  --bg-light: oklch(100% 0.06 297deg);
+  --text: oklch(15% 0.12 297deg);
+  --text-muted: oklch(40% 0.12 297deg);
+  --highlight: oklch(100% 0.12 297deg);
+  --border: oklch(60% 0.12 297deg);
+  --border-muted: oklch(70% 0.12 297deg);
+  --primary: oklch(40% 0.12 297deg);
+  --secondary: oklch(40% 0.12 117deg);
+  --danger: oklch(50% 0.12 30deg);
+  --warning: oklch(50% 0.12 100deg);
+  --success: oklch(50% 0.12 160deg);
+  --info: oklch(50% 0.12 260deg);
+  --gradient: linear-gradient(0deg, var(--bg) 97%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+  --border-card: solid 1px var(--bg);
+  --shadow: 0px 2px 2px oklch(0% 0 0deg / 20%), 0px 4px 4px oklch(0% 0 0deg / 10%);
+  --transition: all 0.5s ease;
 }
 
 body {

@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import type { Product } from '../../pages/home/home';
 import classes from './details.module.css';
 import Detail from './detail';
-import { scrollEvent } from '../../utility/scroll-event';
 import Loader from '../../ui/loader/loader';
 
 const categories: (keyof ProductDetails)[] = ['brand', 'category', 'stock', 'price', 'dimensions'];
@@ -40,14 +39,12 @@ export default function Details(): JSX.Element {
   const navigate = useNavigate();
   const { details } = useParams();
   const location = useLocation();
-  const queries = new URLSearchParams(location.search);
-  const page = queries.get('page');
 
   useEffect(() => {
     (async (): Promise<void> => {
       try {
         if (details && Number.isNaN(+details)) {
-          navigate(`${details}`);
+          navigate('/nopage');
           return;
         }
         setLoading(true);
@@ -56,6 +53,10 @@ export default function Details(): JSX.Element {
         const data: ProductDetails = await response.json();
         setData(data);
         setLoading(false);
+        if (response.status === 404) {
+          navigate('/nopage');
+          return;
+        }
       } catch (error) {
         console.error('Error', error);
       }
@@ -63,8 +64,11 @@ export default function Details(): JSX.Element {
   }, [details]);
 
   function handleCloseEvent(): void {
-    navigate({ pathname: '/', search: `?page=${page}` });
-    scrollEvent({ side: 'top', value: 0, behavior: 'smooth' });
+    navigate(`/${location.search}`);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   return (

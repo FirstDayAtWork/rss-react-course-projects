@@ -1,10 +1,11 @@
 import { useEffect, useState, type JSX } from 'react';
 import Controls from '../../components/controls/controls';
 import Results from '../../components/results/results';
-import { getLSData } from '../../utility/local-storage';
 import Pagination from '../../components/pagination/pagination';
 import { useSearchParams } from 'react-router';
 import { queryMath } from '../../utility/query-math';
+import CheckBoard from '../../components/checkboard/checkboard';
+import type { ProductDetails } from '../../components/details/details';
 
 export type Product = {
   id: number;
@@ -14,7 +15,7 @@ export type Product = {
 };
 
 export type Products = {
-  products: Product[];
+  products: ProductDetails[];
   total: number;
   skip: number;
   limit: number;
@@ -29,7 +30,7 @@ export type AppState = {
 
 export default function Home(): JSX.Element {
   const [state, setState] = useState<AppState>({
-    products: [{ id: 0, title: '', images: [''], description: '' }],
+    products: [],
     total: 0,
     skip: 0,
     limit: 10,
@@ -42,27 +43,24 @@ export default function Home(): JSX.Element {
   const [page, setPage] = useSearchParams();
 
   useEffect(() => {
-    if (typeof state.query === 'string') {
-      (async (): Promise<void> => {
-        const lsData = getLSData('query') ?? '';
-        try {
-          setState({ ...state, isLoading: true, isError: false, errorMessage: null });
-          const search = new URLSearchParams();
-          search.set('q', lsData ? `${lsData}` : state.query);
-          search.set('limit', '10');
-          search.set('skip', queryMath(page, setPage));
-          const url = `https://dummyjson.com/products/search?${search}`;
-          const response = await fetch(url);
-          const data: Products = await response.json();
-          setState({ ...state, ...data, isLoading: false });
-        } catch (error) {
-          if (error instanceof Error) {
-            setState({ ...state, isError: true, errorMessage: error });
-          }
-          console.error('Error', error);
+    (async (): Promise<void> => {
+      try {
+        setState({ ...state, isLoading: true, isError: false, errorMessage: null });
+        const search = new URLSearchParams();
+        search.set('q', state.query);
+        search.set('limit', '10');
+        search.set('skip', queryMath(page, setPage));
+        const url = `https://dummyjson.com/products/search?${search}`;
+        const response = await fetch(url);
+        const data: Products = await response.json();
+        setState({ ...state, ...data, isLoading: false });
+      } catch (error) {
+        if (error instanceof Error) {
+          setState({ ...state, isLoading: true, isError: true, errorMessage: error });
         }
-      })();
-    }
+        console.error('Error', error);
+      }
+    })();
   }, [state.query, page.get('page')]);
 
   function updateState(query: string): void {
@@ -75,6 +73,7 @@ export default function Home(): JSX.Element {
       <Controls updateState={updateState} />
       <Results products={state.products} isLoading={state.isLoading} />
       <Pagination total={state.total} setPage={setPage} />
+      <CheckBoard />
     </>
   );
 }

@@ -1,0 +1,20 @@
+.no-page {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-page > h1 {
+  font-size: 4rem;
+}
+
+.no-page > h2 {
+  font-size: 3rem;
+}
+
+.no-page > img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}

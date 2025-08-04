@@ -20,13 +20,14 @@
   max-width: 500px;
   height: 650px;
   padding: 20px;
-  border: 1px solid var(--border-muted);
+  border: var(--border-card);
   border-top: 1px solid var(--highlight);
   border-radius: 1rem;
 
   text-decoration: none;
 
   background: var(--gradient-hover);
+  box-shadow: var(--shadow);
 
   transition: all 0.5s ease;
 }

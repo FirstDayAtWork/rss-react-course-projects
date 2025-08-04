@@ -1,12 +1,12 @@
 import type { JSX } from 'react';
-import type { Product } from '../../pages/home/home';
 import classes from './results.module.css';
 import Loader from '../../ui/loader/loader';
 import ProductItem from './item';
 import { Outlet } from 'react-router';
+import type { ProductDetails } from '../details/details';
 
 type ResultProps = {
-  products: Product[];
+  products: ProductDetails[];
   isLoading: boolean;
 };
 

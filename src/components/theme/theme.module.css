@@ -1,0 +1,9 @@
+.theme-btn {
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
+
+.hide {
+  display: none;
+}

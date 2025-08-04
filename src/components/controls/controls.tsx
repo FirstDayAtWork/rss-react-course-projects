@@ -1,4 +1,5 @@
-import { useState, type ChangeEvent, type JSX } from 'react';
+import { useEffect, useState } from 'react';
+import type { ChangeEvent, JSX } from 'react';
 import classes from './controls.module.css';
 import { useStorage } from '../../hooks/use-storage';
 
@@ -9,9 +10,16 @@ type ControlsProps = {
 export default function Controls(props: ControlsProps): JSX.Element {
   const { updateState } = props;
 
-  const [value, setValue] = useState('');
+  const [lsValue, setLSValue] = useStorage('', 'query');
+  const [value, setValue] = useState(lsValue);
 
-  const [, setLSValue] = useStorage('', 'query');
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      updateState(value);
+    }, 1000);
+
+    return (): void => clearTimeout(timer);
+  }, []);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     setValue(event?.target.value.trim());

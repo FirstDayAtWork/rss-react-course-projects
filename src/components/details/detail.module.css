@@ -4,3 +4,7 @@
   justify-content: space-between;
   font-size: 1.3rem;
 }
+
+.detail > span {
+  color: var(--text-muted);
+}
