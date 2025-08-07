@@ -56,7 +56,7 @@ export default function Home(): JSX.Element {
         setState({ ...state, ...data, isLoading: false });
       } catch (error) {
         if (error instanceof Error) {
-          setState({ ...state, isLoading: true, isError: true, errorMessage: error });
+          setState({ ...state, isError: true, errorMessage: error });
         }
         console.error('Error', error);
       }
@@ -72,7 +72,7 @@ export default function Home(): JSX.Element {
     <>
       <Controls updateState={updateState} />
       <Results products={state.products} isLoading={state.isLoading} />
-      <Pagination total={state.total} setPage={setPage} />
+      <Pagination total={state.total} setPage={setPage} page={page} />
       <CheckBoard />
     </>
   );

@@ -1,21 +1,22 @@
 import type { MouseEvent, JSX } from 'react';
 import { useState, useEffect } from 'react';
 import classes from './pagination.module.css';
-import { setArray } from '../../utility/set-array';
+import { fillArray } from '../../utility/fill-array';
 import type { SetURLSearchParams } from 'react-router';
 
 type PaginationProps = {
   total: number;
+  page: URLSearchParams;
   setPage: SetURLSearchParams;
 };
 
 export default function Pagination(props: PaginationProps): JSX.Element {
-  const { total, setPage } = props;
+  const { total, page, setPage } = props;
 
-  const [pageInfo, setPageInfo] = useState(setArray(total, 10));
+  const [pageInfo, setPageInfo] = useState(fillArray(total, 10));
 
   useEffect(() => {
-    setPageInfo(setArray(total, 10));
+    setPageInfo(fillArray(total, 10));
   }, [total]);
 
   function handleClick(event: MouseEvent<HTMLButtonElement>): void {
@@ -30,17 +31,18 @@ export default function Pagination(props: PaginationProps): JSX.Element {
 
   return (
     <div className={classes.pagination}>
-      {pageInfo.map((item) => (
-        <button
-          onClick={handleClick}
-          className={classes['pagination-btn']}
-          data-value={item}
-          type="button"
-          key={item + '.'}
-        >
-          {item}
-        </button>
-      ))}
+      {pageInfo.length > 1 &&
+        pageInfo.map((item) => (
+          <button
+            onClick={handleClick}
+            className={`${classes['pagination-btn']} ${page.get('page') === item.toString() && classes.active}`}
+            data-value={item}
+            type="button"
+            key={item + '.'}
+          >
+            {item}
+          </button>
+        ))}
     </div>
   );
 }
