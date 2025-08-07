@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import type { KeyboardEvent, ChangeEvent, JSX } from 'react';
 import classes from './controls.module.css';
 import { useStorage } from '../../hooks/use-storage';
@@ -11,23 +11,18 @@ export default function Controls(props: ControlsProps): JSX.Element {
   const { updateState } = props;
 
   const [lsValue, setLSValue] = useStorage('', 'query');
-  const [value, setValue] = useState(lsValue);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     updateState(value);
-  //   }, 1000);
-
-  //   return (): void => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    updateState(lsValue);
+  }, []);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-    setValue(event?.target.value.trim());
+    setLSValue(event?.target.value.trim());
   }
 
   function handleClick(): void {
-    updateState(value);
-    setLSValue(value);
+    updateState(lsValue);
+    setLSValue(lsValue);
   }
 
   function handleKeyDown(event: KeyboardEvent): void {
@@ -40,7 +35,7 @@ export default function Controls(props: ControlsProps): JSX.Element {
     <div className={classes['controls']}>
       <input
         className={classes['control-input']}
-        value={value}
+        value={lsValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         type="search"

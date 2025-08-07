@@ -1,9 +1,11 @@
-import { useEffect, useState, type JSX } from 'react';
+import type { JSX } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import type { Product } from '../../pages/home/home';
 import classes from './details.module.css';
 import Detail from './detail';
 import Loader from '../../ui/loader/loader';
+import { useQuery } from '@tanstack/react-query';
+import { getDetails } from '../../api/get-details';
 
 const categories: (keyof ProductDetails)[] = ['brand', 'category', 'stock', 'price', 'dimensions'];
 
@@ -22,46 +24,16 @@ type Dimensions = {
 };
 
 export default function Details(): JSX.Element {
-  const [data, setData] = useState<ProductDetails>({
-    id: 0,
-    title: '',
-    images: [''],
-    description: '',
-    price: 0,
-    stock: 0,
-    category: '',
-    brand: '',
-    dimensions: { width: 0, height: 0, depth: 0 },
-  });
-
-  const [isLoading, setLoading] = useState(false);
-
   const navigate = useNavigate();
   const { details } = useParams();
   const location = useLocation();
 
-  useEffect(() => {
-    (async (): Promise<void> => {
-      try {
-        if (details && Number.isNaN(+details)) {
-          navigate('/nopage');
-          return;
-        }
-        setLoading(true);
-        const url = `https://dummyjson.com/products/${details}`;
-        const response = await fetch(url);
-        const data: ProductDetails = await response.json();
-        setData(data);
-        setLoading(false);
-        if (response.status === 404) {
-          navigate('/nopage');
-          return;
-        }
-      } catch (error) {
-        console.error('Error', error);
-      }
-    })();
-  }, [details]);
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ['details', details, navigate],
+    queryFn: () => getDetails({ details, navigate }),
+    staleTime: 10000,
+    retry: false,
+  });
 
   function handleCloseEvent(): void {
     navigate(`/${location.search}`);
@@ -71,11 +43,17 @@ export default function Details(): JSX.Element {
     });
   }
 
+  if (isPending) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    throw error;
+  }
+
   return (
     <div className={classes['details-wrapper']}>
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {data && (
         <div className={classes.details}>
           <button
             type="button"

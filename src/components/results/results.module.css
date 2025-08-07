@@ -10,11 +10,11 @@
   flex: 1;
   flex-flow: row wrap;
   gap: 20px;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 
   max-width: 1620px;
-  margin: auto;
+  margin: 0 auto;
   padding: 20px;
 
   background-color: var(--bg-dark);
