@@ -4,7 +4,7 @@ import classes from './controls.module.css';
 import { useStorage } from '../../hooks/use-storage';
 
 type ControlsProps = {
-  updateState: (query: string) => void;
+  updateState: (query: string, isUpdating: boolean) => void;
 };
 
 export default function Controls(props: ControlsProps): JSX.Element {
@@ -13,7 +13,7 @@ export default function Controls(props: ControlsProps): JSX.Element {
   const [lsValue, setLSValue] = useStorage('', 'query');
 
   useEffect(() => {
-    updateState(lsValue);
+    updateState(lsValue, false);
   }, []);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -21,7 +21,7 @@ export default function Controls(props: ControlsProps): JSX.Element {
   }
 
   function handleClick(): void {
-    updateState(lsValue);
+    updateState(lsValue, true);
     setLSValue(lsValue);
   }
 

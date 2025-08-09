@@ -7,6 +7,7 @@ import CheckBoard from '../../components/checkboard/checkboard';
 import type { ProductDetails } from '../../components/details/details';
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '../../api/get-products';
+import { Refetch } from '../../components/refetch/refetch';
 
 export type Product = {
   id: number;
@@ -39,9 +40,11 @@ export default function Home(): JSX.Element {
     retry: false,
   });
 
-  function updateState(query: string): void {
+  function updateState(query: string, isUpdating: boolean): void {
     setState({ query });
-    setPage({ page: '1' });
+    if (isUpdating) {
+      setPage({ page: '1' });
+    }
   }
 
   return (
@@ -55,6 +58,7 @@ export default function Home(): JSX.Element {
       />
       <Pagination total={data?.total || 0} setPage={setPage} page={page} />
       <CheckBoard />
+      <Refetch />
     </>
   );
 }

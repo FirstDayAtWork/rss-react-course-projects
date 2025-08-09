@@ -1,0 +1,21 @@
+.refetch {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+
+  width: 160px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 1.3rem;
+  color: var(--bg-dark);
+
+  background-color: var(--warning);
+  box-shadow: var(--shadow);
+}
+
+.refetch:hover {
+  cursor: pointer;
+  background-color: var(--danger);
+}
