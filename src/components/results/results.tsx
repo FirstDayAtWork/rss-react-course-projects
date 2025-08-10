@@ -8,13 +8,19 @@ import type { ProductDetails } from '../details/details';
 type ResultProps = {
   products: ProductDetails[];
   isLoading: boolean;
+  isError: boolean;
+  error: Error | null;
 };
 
 export default function Results(props: ResultProps): JSX.Element {
-  const { products, isLoading } = props;
+  const { products, isLoading, isError, error } = props;
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (isError) {
+    throw error;
   }
 
   return (

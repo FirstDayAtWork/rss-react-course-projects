@@ -3,7 +3,7 @@ import classes from './loader.module.css';
 
 export default function Loader(): JSX.Element {
   return (
-    <div className={[classes['loader'], classes['show-loader']].join(' ')}>
+    <div data-testid="loader" className={[classes['loader'], classes['show-loader']].join(' ')}>
       <svg
         className={classes.circle}
         xmlns="http://www.w3.org/2000/svg"

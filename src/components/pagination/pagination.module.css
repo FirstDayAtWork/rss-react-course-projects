@@ -20,12 +20,15 @@
   color: var(--info);
 
   background-color: var(--bg-dark);
+
+  transition: var(--transition);
 }
 
 .pagination-btn:hover {
   cursor: pointer;
+  background-color: var(--bg-light);
 }
 
 .active {
-  background-color: var(--border-muted);
+  background-color: var(--bg-light);
 }

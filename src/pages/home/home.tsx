@@ -1,11 +1,13 @@
-import { useEffect, useState, type JSX } from 'react';
+import type { JSX } from 'react';
 import Controls from '../../components/controls/controls';
 import Results from '../../components/results/results';
 import Pagination from '../../components/pagination/pagination';
 import { useSearchParams } from 'react-router';
-import { queryMath } from '../../utility/query-math';
 import CheckBoard from '../../components/checkboard/checkboard';
 import type { ProductDetails } from '../../components/details/details';
+import { useQuery } from '@tanstack/react-query';
+import { getProducts } from '../../api/get-products';
+import { Refetch } from '../../components/refetch/refetch';
 
 export type Product = {
   id: number;
@@ -22,58 +24,32 @@ export type Products = {
   query: string;
 };
 
-export type AppState = {
-  isLoading: boolean;
-  isError: boolean;
-  errorMessage: Error | null;
-} & Products;
-
 export default function Home(): JSX.Element {
-  const [state, setState] = useState<AppState>({
-    products: [],
-    total: 0,
-    skip: 0,
-    limit: 10,
-    query: '',
-    isLoading: true,
-    isError: false,
-    errorMessage: null,
-  });
-
   const [page, setPage] = useSearchParams();
 
-  useEffect(() => {
-    (async (): Promise<void> => {
-      try {
-        setState({ ...state, isLoading: true, isError: false, errorMessage: null });
-        const search = new URLSearchParams();
-        search.set('q', state.query);
-        search.set('limit', '10');
-        search.set('skip', queryMath(page, setPage));
-        const url = `https://dummyjson.com/products/search?${search}`;
-        const response = await fetch(url);
-        const data: Products = await response.json();
-        setState({ ...state, ...data, isLoading: false });
-      } catch (error) {
-        if (error instanceof Error) {
-          setState({ ...state, isLoading: true, isError: true, errorMessage: error });
-        }
-        console.error('Error', error);
-      }
-    })();
-  }, [state.query, page.get('page')]);
+  const { data, isError, isPending, error } = useQuery({
+    queryKey: ['data', page.get('q'), page.get('page'), setPage],
+    queryFn: () => getProducts({ query: page.get('q'), page: page.get('page'), setPage }),
+    staleTime: 10000,
+    retry: false,
+  });
 
-  function updateState(query: string): void {
-    setState({ ...state, query });
-    setPage({ page: '1' });
+  function updatePage(query: string): void {
+    setPage({ page: '1', q: query });
   }
 
   return (
     <>
-      <Controls updateState={updateState} />
-      <Results products={state.products} isLoading={state.isLoading} />
-      <Pagination total={state.total} setPage={setPage} />
+      <Controls updatePage={updatePage} />
+      <Results
+        products={data?.products || []}
+        isLoading={isPending}
+        isError={isError}
+        error={error}
+      />
+      <Pagination total={data?.total || 0} setPage={setPage} page={page} />
       <CheckBoard />
+      <Refetch />
     </>
   );
 }

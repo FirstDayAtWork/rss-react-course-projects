@@ -1,4 +1,5 @@
 import type { ProductDetails } from '../../components/details/details';
+import type { Products } from '../../pages/home/home';
 
 export const MockProduct1: ProductDetails = {
   id: 1,
@@ -33,3 +34,11 @@ const MockProduct2: ProductDetails = {
 };
 
 export const MockArray: ProductDetails[] = [MockProduct1, MockProduct2];
+
+export const MockProducts: Products = {
+  products: MockArray,
+  total: 2,
+  skip: 0,
+  limit: 10,
+  query: '',
+};

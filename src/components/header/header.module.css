@@ -26,6 +26,7 @@
 .navbar-item {
   width: 90px;
   padding: 12px 14px;
+  border-bottom: 3px solid transparent;
 
   font-size: 1.5rem;
   color: var(--text-muted);
@@ -37,4 +38,8 @@
 
 .navbar-item:hover {
   color: var(--text);
+}
+
+.active {
+  border-bottom: 3px solid var(--border-muted);
 }

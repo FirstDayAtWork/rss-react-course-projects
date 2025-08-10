@@ -1,8 +1,10 @@
 import type { JSX } from 'react';
 import classes from './header.module.css';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router';
 import Theme from '../theme/theme';
 import ThemeProvider from '../theme/theme-provider';
+
+const navNames = ['Home', 'About'];
 
 export default function Header(): JSX.Element {
   return (
@@ -12,12 +14,18 @@ export default function Header(): JSX.Element {
         <Theme />
       </ThemeProvider>
       <nav className={classes.navbar}>
-        <Link to={'/'} className={classes['navbar-item']}>
-          Home
-        </Link>
-        <Link to={'about'} className={classes['navbar-item']}>
-          About
-        </Link>
+        {navNames.map((item) => (
+          <NavLink
+            key={item}
+            to={item === 'Home' ? '/' : item.toLowerCase()}
+            className={({ isActive }) =>
+              `${classes['navbar-item']} ${isActive ? classes.active : ''}`
+            }
+            {...(item === 'Home' && { end: true })}
+          >
+            {item}
+          </NavLink>
+        ))}
       </nav>
     </header>
   );
