@@ -1,27 +1,22 @@
-import { useEffect } from 'react';
 import type { KeyboardEvent, ChangeEvent, JSX } from 'react';
 import classes from './controls.module.css';
 import { useStorage } from '../../hooks/use-storage';
 
 type ControlsProps = {
-  updateState: (query: string, isUpdating: boolean) => void;
+  updatePage: (query: string) => void;
 };
 
 export default function Controls(props: ControlsProps): JSX.Element {
-  const { updateState } = props;
+  const { updatePage } = props;
 
   const [lsValue, setLSValue] = useStorage('', 'query');
-
-  useEffect(() => {
-    updateState(lsValue, false);
-  }, []);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     setLSValue(event?.target.value.trim());
   }
 
   function handleClick(): void {
-    updateState(lsValue, true);
+    updatePage(lsValue);
     setLSValue(lsValue);
   }
 

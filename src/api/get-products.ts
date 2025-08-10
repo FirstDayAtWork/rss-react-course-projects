@@ -3,7 +3,7 @@ import type { Products } from '../pages/home/home';
 import { queryMath } from '../utility/query-math';
 
 type GetProductsProps = {
-  query: string;
+  query: string | null;
   page: string | null;
   setPage: SetURLSearchParams;
 };
@@ -13,7 +13,7 @@ export async function getProducts(props: GetProductsProps): Promise<Products> {
 
   try {
     const search = new URLSearchParams();
-    search.set('q', query);
+    search.set('q', query ?? '');
     search.set('limit', '10');
     search.set('skip', queryMath(page, setPage));
     const url = `https://dummyjson.com/products/search?${search}`;

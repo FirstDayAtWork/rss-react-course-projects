@@ -1,4 +1,4 @@
-import { useState, type JSX } from 'react';
+import type { JSX } from 'react';
 import Controls from '../../components/controls/controls';
 import Results from '../../components/results/results';
 import Pagination from '../../components/pagination/pagination';
@@ -24,32 +24,23 @@ export type Products = {
   query: string;
 };
 
-export type AppState = { query: string };
-
 export default function Home(): JSX.Element {
-  const [state, setState] = useState<AppState>({
-    query: '',
-  });
-
   const [page, setPage] = useSearchParams();
 
   const { data, isError, isPending, error } = useQuery({
-    queryKey: ['data', state.query, page.get('page'), setPage],
-    queryFn: () => getProducts({ query: state.query, page: page.get('page'), setPage }),
+    queryKey: ['data', page.get('q'), page.get('page'), setPage],
+    queryFn: () => getProducts({ query: page.get('q'), page: page.get('page'), setPage }),
     staleTime: 10000,
     retry: false,
   });
 
-  function updateState(query: string, isUpdating: boolean): void {
-    setState({ query });
-    if (isUpdating) {
-      setPage({ page: '1' });
-    }
+  function updatePage(query: string): void {
+    setPage({ page: '1', q: query });
   }
 
   return (
     <>
-      <Controls updateState={updateState} />
+      <Controls updatePage={updatePage} />
       <Results
         products={data?.products || []}
         isLoading={isPending}
