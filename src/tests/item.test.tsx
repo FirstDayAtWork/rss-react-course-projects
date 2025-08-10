@@ -48,7 +48,6 @@ describe('rendering', () => {
 
     expect(checkbox).toBeInTheDocument();
     expect(checkbox).not.toBeChecked();
-    screen.debug();
   });
 });
 
