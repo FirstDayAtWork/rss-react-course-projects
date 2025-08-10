@@ -21,7 +21,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
 
   function handleClick(event: MouseEvent<HTMLButtonElement>): void {
     if (event.target instanceof HTMLElement) {
-      setPage({ page: event.target.dataset.value ?? '' });
+      setPage({ page: event.target.dataset.value ?? '', q: page.get('q') ?? '' });
 
       window.scrollTo({
         top: 0,
