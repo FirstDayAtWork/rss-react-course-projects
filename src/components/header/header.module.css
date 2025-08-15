@@ -13,33 +13,3 @@
 .header > h2 {
   color: var(--text);
 }
-
-.navbar {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: end;
-
-  width: 300px;
-}
-
-.navbar-item {
-  width: 90px;
-  padding: 12px 14px;
-  border-bottom: 3px solid transparent;
-
-  font-size: 1.5rem;
-  color: var(--text-muted);
-  text-align: center;
-  text-decoration: none;
-
-  transition: var(--transition);
-}
-
-.navbar-item:hover {
-  color: var(--text);
-}
-
-.active {
-  border-bottom: 3px solid var(--border-muted);
-}

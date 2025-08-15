@@ -1,3 +1,5 @@
+'use client';
+
 import { use, type JSX } from 'react';
 import { ThemeContext } from './theme-context';
 import classes from './theme.module.css';

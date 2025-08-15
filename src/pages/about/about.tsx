@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import { type JSX } from 'react';
 import classes from './about.module.css';
 
 export default function About(): JSX.Element {
@@ -8,7 +8,7 @@ export default function About(): JSX.Element {
         <h1>About Page</h1>
         <h2>{'App for learning purposes only >:D'}</h2>
       </div>
-      <footer>
+      <footer className={classes.footer}>
         <a className={classes['footer-author-link']} href="https://github.com/FirstDayAtWork">
           Github
         </a>
