@@ -2,7 +2,7 @@
   display: flex;
   gap: 5px;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 
   width: 300px;
 }

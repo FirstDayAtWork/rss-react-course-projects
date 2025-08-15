@@ -1,21 +1,21 @@
-import type { SetURLSearchParams } from 'react-router';
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import type { Products } from '../pages/home/home';
 import { queryMath } from '../utility/query-math';
 
 type GetProductsProps = {
   query: string | null;
-  page: string | null;
-  setPage: SetURLSearchParams;
+  location: string | null;
+  navigate: AppRouterInstance;
 };
 
 export async function getProducts(props: GetProductsProps): Promise<Products> {
-  const { query, page, setPage } = props;
+  const { query, location, navigate } = props;
 
   try {
     const search = new URLSearchParams();
     search.set('q', query ?? '');
     search.set('limit', '10');
-    search.set('skip', queryMath(page, setPage));
+    search.set('skip', queryMath(location, navigate));
     const url = `https://dummyjson.com/products/search?${search}`;
     const response = await fetch(url);
     const data: Products = await response.json();

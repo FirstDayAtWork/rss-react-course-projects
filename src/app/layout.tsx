@@ -1,6 +1,7 @@
 import type { JSX, ReactNode } from 'react';
 import type { Metadata } from 'next';
 import '../../src/index.css';
+import Providers from './provider';
 import Header from '../components/header/header';
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
       <body>
         <div id="root">
           <Header />
-          {children}
+          <Providers>{children}</Providers>
         </div>
       </body>
     </html>

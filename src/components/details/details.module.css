@@ -1,7 +1,7 @@
 .details-wrapper {
   display: flex;
   flex: 1;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 
   padding: 20px;

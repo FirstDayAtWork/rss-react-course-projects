@@ -3,8 +3,11 @@ export function setLSData<T>(key: string, data: T): void {
 }
 
 export function getLSData<T>(key: string): T | null {
-  const value = localStorage.getItem(key);
-  return value ? JSON.parse(value) : null;
+  if (typeof localStorage !== 'undefined') {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  }
+  return null;
 }
 
 export function removeLSData(key: string): void {

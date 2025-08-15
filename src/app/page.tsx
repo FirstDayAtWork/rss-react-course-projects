@@ -1,5 +1,8 @@
+'use client';
+
 import type { JSX } from 'react';
+import Home from '../pages/home/home';
 
 export default function Page(): JSX.Element {
-  return <h1>Hello Next.js!</h1>;
+  return <Home />;
 }

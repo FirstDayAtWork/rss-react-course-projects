@@ -1,11 +1,11 @@
 import type { JSX } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router';
 import type { Product } from '../../pages/home/home';
 import classes from './details.module.css';
 import Detail from './detail';
 import Loader from '../../ui/loader/loader';
 import { useQuery } from '@tanstack/react-query';
 import { getDetails } from '../../api/get-details';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 const categories: (keyof ProductDetails)[] = ['brand', 'category', 'stock', 'price', 'dimensions'];
 
@@ -24,19 +24,20 @@ type Dimensions = {
 };
 
 export default function Details(): JSX.Element {
-  const navigate = useNavigate();
-  const { details } = useParams();
-  const location = useLocation();
+  const parametrs = useParams();
+  const navigate = useRouter();
+  const location = useSearchParams();
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['details', details, navigate],
-    queryFn: () => getDetails({ details, navigate }),
-    staleTime: 10000,
+    queryKey: ['details', parametrs?.details],
+    queryFn: () => getDetails({ details: parametrs?.details }),
+    staleTime: 90000,
     retry: false,
   });
 
   function handleCloseEvent(): void {
-    navigate(`/${location.search}`);
+    navigate.push(`/?${location}`, { scroll: false });
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
