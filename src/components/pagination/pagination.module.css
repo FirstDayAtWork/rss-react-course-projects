@@ -18,6 +18,8 @@
 
   font-size: 1.2rem;
   color: var(--info);
+  text-align: center;
+  text-decoration: none;
 
   background-color: var(--bg-dark);
 

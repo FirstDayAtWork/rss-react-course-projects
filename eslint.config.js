@@ -67,6 +67,8 @@ export default tseslint.config(
             j: true,
             props: true,
             Props: true,
+            dynamicParams: true,
+            generateStaticParams: true,
           },
         },
       ],

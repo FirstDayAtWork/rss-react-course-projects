@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const navNames = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: 'about' },
+  { name: 'About', path: '/about' },
 ];
 
 export default function Navigation(): JSX.Element {

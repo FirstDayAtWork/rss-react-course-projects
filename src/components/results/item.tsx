@@ -1,3 +1,5 @@
+'use client';
+
 import type { ChangeEvent, MouseEvent, JSX } from 'react';
 import classes from './item.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -23,7 +25,7 @@ export default function ProductItem(props: ItemProps): JSX.Element {
       return;
     }
 
-    navigate.push(`${item.id}?${location}`);
+    navigate.push(`/product/${item.id}?${location}`);
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

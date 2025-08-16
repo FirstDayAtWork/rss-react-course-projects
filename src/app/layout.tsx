@@ -1,7 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import type { Metadata } from 'next';
 import '../../src/index.css';
-import Providers from './provider';
 import Header from '../components/header/header';
 
 export const metadata: Metadata = {
@@ -9,13 +8,20 @@ export const metadata: Metadata = {
   description: 'React Course App',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
+export default function RootLayout({
+  children,
+  product,
+}: {
+  children: ReactNode;
+  product: ReactNode;
+}): JSX.Element {
   return (
     <html lang="en">
       <body>
         <div id="root">
           <Header />
-          <Providers>{children}</Providers>
+          {children}
+          {product}
         </div>
       </body>
     </html>

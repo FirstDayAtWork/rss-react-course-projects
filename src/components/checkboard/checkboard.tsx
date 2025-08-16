@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, type JSX } from 'react';
 import classes from './checkboard.module.css';
 import { useItemStore } from '../../stores/store';

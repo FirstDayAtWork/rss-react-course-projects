@@ -8,24 +8,21 @@ type GetDetailsProps = {
 export async function getDetails(props: GetDetailsProps): Promise<ProductDetails | undefined> {
   const { details } = props;
 
-  try {
-    if (details && Number.isNaN(+details)) {
-      return notFound();
-    }
-
-    const url = `https://dummyjson.com/products/${details}`;
-    const response = await fetch(url);
-    const data: ProductDetails = await response.json();
-
-    if (response.ok) {
-      return data;
-    }
-
-    if (response.status === 404) {
-      return notFound();
-    }
-  } catch (error) {
-    console.error('Error', error);
+  if (details && Number.isNaN(+details)) {
+    return notFound();
   }
+
+  const url = `https://dummyjson.com/products/${details}`;
+  const response = await fetch(url);
+  const data: ProductDetails = await response.json();
+
+  if (response.ok) {
+    return data;
+  }
+
+  if (response.status === 404) {
+    return notFound();
+  }
+
   throw new Error('Something went wrong');
 }
