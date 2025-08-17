@@ -1,11 +1,10 @@
 import type { JSX } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router';
 import type { Product } from '../../pages/home/home';
 import classes from './details.module.css';
 import Detail from './detail';
-import Loader from '../../ui/loader/loader';
-import { useQuery } from '@tanstack/react-query';
 import { getDetails } from '../../api/get-details';
+import CloseDetail from './close-detail';
+import Image from 'next/image';
 
 const categories: (keyof ProductDetails)[] = ['brand', 'category', 'stock', 'price', 'dimensions'];
 
@@ -23,56 +22,36 @@ type Dimensions = {
   depth: number;
 };
 
-export default function Details(): JSX.Element {
-  const navigate = useNavigate();
-  const { details } = useParams();
-  const location = useLocation();
+type DetailsProps = {
+  details: string;
+};
 
-  const { data, isPending, isError, error } = useQuery({
-    queryKey: ['details', details, navigate],
-    queryFn: () => getDetails({ details, navigate }),
-    staleTime: 10000,
-    retry: false,
-  });
-
-  function handleCloseEvent(): void {
-    navigate(`/${location.search}`);
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
-
-  if (isPending) {
-    return <Loader />;
-  }
-
-  if (isError) {
-    throw error;
-  }
+export default async function Details(props: DetailsProps): Promise<JSX.Element> {
+  const { details } = props;
+  const data = await getDetails({ details });
 
   return (
-    <div className={classes['details-wrapper']}>
+    <>
       {data && (
-        <div className={classes.details}>
-          <button
-            type="button"
-            name="close-details"
-            className={classes['close-details-btn']}
-            onClick={handleCloseEvent}
-          ></button>
-          {data.images[0] && (
-            <img src={data.images[0]} alt="Product Image" width={200} height={200} />
-          )}
-          <span className={classes['details-title']}>{data.title}</span>
-          <p className={classes['details-description']}>{data.description}</p>
-          <ul className={classes['detail-wrapper']}>
-            {categories.map((item) => (
-              <Detail key={item + '.'} data={data} name={item} />
-            ))}
-          </ul>
-        </div>
+        <>
+          <div className={classes.background}></div>
+          <div className={classes['details-wrapper']}>
+            <div className={classes.details}>
+              <CloseDetail />
+              {data.images[0] && (
+                <Image src={data.images[0]} alt="Product Image" width={200} height={200} />
+              )}
+              <span className={classes['details-title']}>{data.title}</span>
+              <p className={classes['details-description']}>{data.description}</p>
+              <ul className={classes['detail-wrapper']}>
+                {categories.map((item) => (
+                  <Detail key={item + '.'} data={data} name={item} />
+                ))}
+              </ul>
+            </div>
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 }

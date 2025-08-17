@@ -1,13 +1,11 @@
 import type { JSX } from 'react';
+import { redirect } from 'next/navigation';
 import Controls from '../../components/controls/controls';
 import Results from '../../components/results/results';
 import Pagination from '../../components/pagination/pagination';
-import { useSearchParams } from 'react-router';
 import CheckBoard from '../../components/checkboard/checkboard';
 import type { ProductDetails } from '../../components/details/details';
-import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '../../api/get-products';
-import { Refetch } from '../../components/refetch/refetch';
 
 export type Product = {
   id: number;
@@ -24,32 +22,30 @@ export type Products = {
   query: string;
 };
 
-export default function Home(): JSX.Element {
-  const [page, setPage] = useSearchParams();
+type HomeProps = {
+  q: string | undefined;
+  page: string | undefined;
+};
 
-  const { data, isError, isPending, error } = useQuery({
-    queryKey: ['data', page.get('q'), page.get('page'), setPage],
-    queryFn: () => getProducts({ query: page.get('q'), page: page.get('page'), setPage }),
-    staleTime: 10000,
-    retry: false,
-  });
+export default async function Home(props: HomeProps): Promise<JSX.Element> {
+  const { q, page } = props;
 
-  function updatePage(query: string): void {
-    setPage({ page: '1', q: query });
+  if (!page) {
+    const queries = new URLSearchParams({ page: '1' });
+    redirect(`/?${queries}`);
   }
+
+  const data = await getProducts({
+    query: q ?? '',
+    location: page,
+  });
 
   return (
     <>
-      <Controls updatePage={updatePage} />
-      <Results
-        products={data?.products || []}
-        isLoading={isPending}
-        isError={isError}
-        error={error}
-      />
-      <Pagination total={data?.total || 0} setPage={setPage} page={page} />
+      <Controls />
+      <Results products={data?.products || []} />
+      <Pagination total={data?.total || 0} />
       <CheckBoard />
-      <Refetch />
     </>
   );
 }

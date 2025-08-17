@@ -1,13 +1,14 @@
+'use client';
+
 import type { KeyboardEvent, ChangeEvent, JSX } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import classes from './controls.module.css';
 import { useStorage } from '../../hooks/use-storage';
 
-type ControlsProps = {
-  updatePage: (query: string) => void;
-};
-
-export default function Controls(props: ControlsProps): JSX.Element {
-  const { updatePage } = props;
+export default function Controls(): JSX.Element {
+  const navigate = useRouter();
+  const pathname = usePathname();
+  const location = useSearchParams();
 
   const [lsValue, setLSValue] = useStorage('', 'query');
 
@@ -24,6 +25,20 @@ export default function Controls(props: ControlsProps): JSX.Element {
     if (event.key === 'Enter') {
       handleClick();
     }
+  }
+
+  function updatePage(query: string): void {
+    const queries = new URLSearchParams(location?.toString());
+    queries.set('page', '1');
+    queries.set('q', query);
+
+    const preview = `${pathname}?${location}`;
+    const current = `${pathname}?${queries}`;
+
+    if (preview === current) {
+      return;
+    }
+    navigate.push(current);
   }
 
   return (

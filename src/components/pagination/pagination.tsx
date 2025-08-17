@@ -1,17 +1,21 @@
-import type { MouseEvent, JSX } from 'react';
+'use client';
+
+import type { JSX } from 'react';
 import { useState, useEffect } from 'react';
 import classes from './pagination.module.css';
 import { fillArray } from '../../utility/fill-array';
-import type { SetURLSearchParams } from 'react-router';
+import { usePathname, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 type PaginationProps = {
   total: number;
-  page: URLSearchParams;
-  setPage: SetURLSearchParams;
 };
 
 export default function Pagination(props: PaginationProps): JSX.Element {
-  const { total, page, setPage } = props;
+  const { total } = props;
+
+  const pathname = usePathname();
+  const location = useSearchParams();
 
   const [pageInfo, setPageInfo] = useState(fillArray(total, 10));
 
@@ -19,31 +23,29 @@ export default function Pagination(props: PaginationProps): JSX.Element {
     setPageInfo(fillArray(total, 10));
   }, [total]);
 
-  function handleClick(event: MouseEvent<HTMLButtonElement>): void {
-    if (event.target instanceof HTMLElement) {
-      setPage({ page: event.target.dataset.value ?? '', q: page.get('q') ?? '' });
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
+  function handleUrl(value: number): string {
+    const queries = new URLSearchParams(location?.toString());
+    queries.set('page', value.toString());
+    return `${pathname}?${queries}`;
   }
 
   return (
-    <div className={classes.pagination}>
-      {pageInfo.length > 1 &&
-        pageInfo.map((item) => (
-          <button
-            onClick={handleClick}
-            className={`${classes['pagination-btn']} ${page.get('page') === item.toString() && classes.active}`}
-            data-value={item}
-            type="button"
-            key={item + '.'}
-          >
-            {item}
-          </button>
-        ))}
-    </div>
+    <>
+      {pageInfo.length > 1 && (
+        <div className={classes.pagination}>
+          {pageInfo.map((item) => (
+            <Link
+              href={handleUrl(item)}
+              className={`${classes['pagination-btn']} ${location?.get('page') === item.toString() && classes.active}`}
+              data-value={item}
+              type="button"
+              key={item + '.'}
+            >
+              {item}
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

@@ -7,6 +7,7 @@ import tseslint from 'typescript-eslint'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import pluginQuery from '@tanstack/eslint-plugin-query'
+import nextPlugin from "@next/eslint-plugin-next";
 
 export default tseslint.config(
   ...pluginQuery.configs['flat/recommended'],
@@ -31,9 +32,12 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      "@next/next": nextPlugin,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
@@ -63,6 +67,8 @@ export default tseslint.config(
             j: true,
             props: true,
             Props: true,
+            dynamicParams: true,
+            generateStaticParams: true,
           },
         },
       ],

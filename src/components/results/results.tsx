@@ -1,27 +1,14 @@
 import type { JSX } from 'react';
 import classes from './results.module.css';
-import Loader from '../../ui/loader/loader';
 import ProductItem from './item';
-import { Outlet } from 'react-router';
 import type { ProductDetails } from '../details/details';
 
 type ResultProps = {
   products: ProductDetails[];
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
 };
 
 export default function Results(props: ResultProps): JSX.Element {
-  const { products, isLoading, isError, error } = props;
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (isError) {
-    throw error;
-  }
+  const { products } = props;
 
   return (
     <div className={classes['product-wrapper']}>
@@ -32,7 +19,6 @@ export default function Results(props: ResultProps): JSX.Element {
           <h2>No Results Found</h2>
         )}
       </ul>
-      <Outlet />
     </div>
   );
 }

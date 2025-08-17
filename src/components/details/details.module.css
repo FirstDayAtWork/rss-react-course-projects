@@ -1,10 +1,50 @@
 .details-wrapper {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: flex;
   flex: 1;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 
-  padding: 20px;
+  /* min-width: 500px;
+  max-width: 500px; */
+  height: 100%;
+  padding: 20px 0;
+
+  background: var(--gradient-hover);
+  background: #00000017;
+  backdrop-filter: blur(17px);
+  backdrop-filter: blur(17px);
+  box-shadow: -20px 0 200px rgb(0 0 0 / 30%);
+
+  animation-name: open;
+  animation-duration: 0.5s;
+}
+
+.background {
+  position: fixed;
+  z-index: 9;
+  inset: 0;
+
+  background-color: transparent;
+  backdrop-filter: blur(38px);
+  backdrop-filter: blur(38px);
+}
+
+@keyframes open {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .details {
@@ -14,53 +54,19 @@
   flex-flow: column nowrap;
   gap: 10px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   min-width: 500px;
-  max-width: 500px;
-  height: 650px;
+  max-width: 575px;
+  height: 100%;
   padding: 20px;
-  border: var(--border-card);
-  border-top: 1px solid var(--highlight);
   border-radius: 1rem;
 
   text-decoration: none;
 
-  background: var(--gradient-hover);
-  box-shadow: var(--shadow);
+  background: transparent;
 
   transition: all 0.5s ease;
-}
-
-.close-details-btn {
-  cursor: pointer;
-
-  position: absolute;
-  top: 20px;
-  right: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 48px;
-  height: 48px;
-  border: 1px solid transparent;
-  border-radius: 50%;
-
-  background-color: inherit;
-
-  transition: all 0.5s ease;
-}
-
-.close-details-btn:hover {
-  border: 1px solid var(--border);
-}
-
-.close-details-btn::after {
-  content: url('/icons/cross_48.svg');
-  width: 48px;
-  height: 48px;
 }
 
 .details-title {
@@ -70,6 +76,7 @@
 
 .details-description {
   font-size: 1.2rem;
+  line-height: 27px;
   color: var(--text-muted);
 }
 
@@ -79,5 +86,12 @@
   gap: 10px;
 
   min-width: 100%;
+  height: 100%;
   padding: 0;
+}
+
+@media screen and (width <= 658px) {
+  .details {
+    min-width: 100vw;
+  }
 }
