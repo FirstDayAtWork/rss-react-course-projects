@@ -31,22 +31,27 @@ export default async function Details(props: DetailsProps): Promise<JSX.Element>
   const data = await getDetails({ details });
 
   return (
-    <div className={classes['details-wrapper']}>
+    <>
       {data && (
-        <div className={classes.details}>
-          <CloseDetail />
-          {data.images[0] && (
-            <Image src={data.images[0]} alt="Product Image" width={200} height={200} />
-          )}
-          <span className={classes['details-title']}>{data.title}</span>
-          <p className={classes['details-description']}>{data.description}</p>
-          <ul className={classes['detail-wrapper']}>
-            {categories.map((item) => (
-              <Detail key={item + '.'} data={data} name={item} />
-            ))}
-          </ul>
-        </div>
+        <>
+          <div className={classes.background}></div>
+          <div className={classes['details-wrapper']}>
+            <div className={classes.details}>
+              <CloseDetail />
+              {data.images[0] && (
+                <Image src={data.images[0]} alt="Product Image" width={200} height={200} />
+              )}
+              <span className={classes['details-title']}>{data.title}</span>
+              <p className={classes['details-description']}>{data.description}</p>
+              <ul className={classes['detail-wrapper']}>
+                {categories.map((item) => (
+                  <Detail key={item + '.'} data={data} name={item} />
+                ))}
+              </ul>
+            </div>
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 }

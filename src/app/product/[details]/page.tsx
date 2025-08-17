@@ -1,6 +1,6 @@
 import { type JSX } from 'react';
 import Details from '../../../components/details/details';
-import { getJustProducts } from '../../../api/get-products';
+import { getAllProducts } from '../../../api/get-products';
 import Home from '../../../pages/home/home';
 export const dynamicParams = false;
 
@@ -14,7 +14,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams(): Promise<Slugs[]> {
-  const data = await getJustProducts();
+  const data = await getAllProducts();
   return data.products.map((item) => ({ details: item.id.toString() }));
 }
 

@@ -23,8 +23,8 @@ export async function getProducts(props: GetProductsProps): Promise<Products> {
   throw new Error('Something went wrong');
 }
 
-export async function getJustProducts(): Promise<Products> {
-  const url = `https://dummyjson.com/products`;
+export async function getAllProducts(): Promise<Products> {
+  const url = `https://dummyjson.com/products?limit=0`;
   const response = await fetch(url);
   const data: Products = await response.json();
   if (response.ok) {

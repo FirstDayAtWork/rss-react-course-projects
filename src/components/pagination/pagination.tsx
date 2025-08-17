@@ -24,27 +24,28 @@ export default function Pagination(props: PaginationProps): JSX.Element {
   }, [total]);
 
   function handleUrl(value: number): string {
-    const queries = new URLSearchParams({
-      page: value.toString(),
-      q: location?.get('q') ?? '',
-    });
+    const queries = new URLSearchParams(location?.toString());
+    queries.set('page', value.toString());
     return `${pathname}?${queries}`;
   }
 
   return (
-    <div className={classes.pagination}>
-      {pageInfo.length > 1 &&
-        pageInfo.map((item) => (
-          <Link
-            href={handleUrl(item)}
-            className={`${classes['pagination-btn']} ${location?.get('page') === item.toString() && classes.active}`}
-            data-value={item}
-            type="button"
-            key={item + '.'}
-          >
-            {item}
-          </Link>
-        ))}
-    </div>
+    <>
+      {pageInfo.length > 1 && (
+        <div className={classes.pagination}>
+          {pageInfo.map((item) => (
+            <Link
+              href={handleUrl(item)}
+              className={`${classes['pagination-btn']} ${location?.get('page') === item.toString() && classes.active}`}
+              data-value={item}
+              type="button"
+              key={item + '.'}
+            >
+              {item}
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

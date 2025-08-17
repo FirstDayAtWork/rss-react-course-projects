@@ -4,7 +4,7 @@ import '../../src/index.css';
 import Header from '../components/header/header';
 
 export const metadata: Metadata = {
-  title: 'Some Website',
+  title: 'FU NextJs',
   description: 'React Course App',
 };
 

@@ -28,9 +28,13 @@ export default function Controls(): JSX.Element {
   }
 
   function updatePage(query: string): void {
-    const queries = new URLSearchParams({ page: '1', q: query });
+    const queries = new URLSearchParams(location?.toString());
+    queries.set('page', '1');
+    queries.set('q', query);
+
     const preview = `${pathname}?${location}`;
     const current = `${pathname}?${queries}`;
+
     if (preview === current) {
       return;
     }

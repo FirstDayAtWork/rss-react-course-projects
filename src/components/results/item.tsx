@@ -5,6 +5,7 @@ import classes from './item.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useItemStore } from '../../stores/store';
 import type { ProductDetails } from '../details/details';
+import Image from 'next/image';
 
 type ItemProps = {
   item: ProductDetails;
@@ -52,7 +53,9 @@ export default function ProductItem(props: ItemProps): JSX.Element {
         id={`product-li-checkbox${item.id}`}
         title="Select item"
       />
-      {item.images[0] && <img src={item.images[0]} alt="Product Image" width={150} height={150} />}
+      {item.images[0] && (
+        <Image src={item.images[0]} alt="Product Image" width={150} height={150} />
+      )}
       <span className={classes['product-li-title']}>{item.title}</span>
       <p className={classes['product-li-description']}>{item.description}</p>
     </li>

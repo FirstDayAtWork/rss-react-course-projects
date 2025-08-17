@@ -3,8 +3,8 @@
 import { useRef, type JSX } from 'react';
 import classes from './checkboard.module.css';
 import { useItemStore } from '../../stores/store';
-import { dataToCsv } from '../../utility/data-to-csv';
-import { setBlobUrl } from '../../utility/set-blob-url';
+import { compileCSV } from '../../app/compile-csv';
+import Image from 'next/image';
 
 export default function CheckBoard(): JSX.Element {
   const linkReference = useRef<HTMLAnchorElement>(null);
@@ -15,13 +15,14 @@ export default function CheckBoard(): JSX.Element {
     clearStore();
   }
 
-  function handleDownload(): void {
+  async function handleDownload(): Promise<void> {
     const regex = /id|title|brand|category|stock|price/g;
-    const csv = dataToCsv(items, regex);
-    const url = setBlobUrl(csv);
+
+    const response = await compileCSV(items, regex);
+    const csv = await response.text();
 
     if (linkReference.current) {
-      linkReference.current.href = url;
+      linkReference.current.href = csv;
       linkReference.current.download = `${items.length}_items.csv`;
       linkReference.current.click();
     }
@@ -40,7 +41,7 @@ export default function CheckBoard(): JSX.Element {
             className={classes['checkboard-btn']}
             type="button"
           >
-            <img src="icons/delete_48.svg" alt="delete icon" width={48} height={48} />
+            <Image src="icons/delete_48.svg" alt="delete icon" width={48} height={48} />
           </button>
           <button
             onClick={handleDownload}
@@ -48,7 +49,7 @@ export default function CheckBoard(): JSX.Element {
             className={classes['checkboard-btn']}
             type="button"
           >
-            <img src="icons/download_48.svg" alt="download icon" width={48} height={48} />
+            <Image src="icons/download_48.svg" alt="download icon" width={48} height={48} />
           </button>
           <a ref={linkReference} href="" download=""></a>
         </div>
