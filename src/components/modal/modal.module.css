@@ -1,0 +1,42 @@
+.modal {
+  min-width: 360px;
+  max-width: 360px;
+  border: 1px solid white;
+  border-radius: 17px;
+
+  color: var(--font-color-2);
+
+  background-color: rgb(80 80 80 / 77.4%);
+}
+
+.head {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.head-txt {
+  font-size: 1.1rem;
+}
+
+.close-btn {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+
+  background-color: inherit;
+}
+
+.close-btn::after {
+  content: url('/icons/cross_24.svg');
+  width: 24px;
+  height: 24px;
+}
