@@ -36,7 +36,7 @@ export default function Modal(props: ModalProps): JSX.Element {
           onClick={handleClose}
         ></button>
       </div>
-      <Form />
+      <Form handleClose={handleClose} />
     </dialog>,
     document.body,
   );
