@@ -20,6 +20,7 @@ export default function Form(props: FormProps): JSX.Element {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isValid },
   } = useForm<FormInputs>({ mode: 'onChange', resolver: zodResolver(schema) });
 
@@ -36,7 +37,13 @@ export default function Form(props: FormProps): JSX.Element {
       <ul>
         {array.length > 0 &&
           array.map((item) => (
-            <Input key={item[0]} register={register} error={errors} content={item} />
+            <Input
+              key={item[0]}
+              register={register}
+              setValue={setValue}
+              error={errors}
+              content={item}
+            />
           ))}
 
         <Select register={register} error={errors} name={'gender'} options={selectOptions} />
@@ -45,7 +52,6 @@ export default function Form(props: FormProps): JSX.Element {
           <Checkbox key={item.name} register={register} error={errors} data={item} />
         ))}
       </ul>
-
       <button className={[!isValid && 'disabled', ''].join(' ')} disabled={!isValid} type="submit">
         Submit
       </button>

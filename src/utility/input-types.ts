@@ -5,7 +5,8 @@ const INPUT_TYPES: Map<keyof FormInputs, string> = new Map()
   .set('age', 'number')
   .set('email', 'email')
   .set('password', 'password')
-  .set('confirm', 'password');
+  .set('confirm', 'password')
+  .set('image', 'file');
 
 export const array = [...INPUT_TYPES.entries()];
 

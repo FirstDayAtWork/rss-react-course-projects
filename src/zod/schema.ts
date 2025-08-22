@@ -30,6 +30,13 @@ const passwordSchema = z
     path: ['confirm'],
   });
 
-export const schema = basicSchema.and(passwordSchema);
+const imageSchema = z.object({
+  image: z
+    .file({ error: 'Must be a file' })
+    .mime(['image/png', 'image/jpeg'], { error: 'Must be PNG or JPEG' })
+    .max(1_000_000, { error: 'Max 1MB' }),
+});
+
+export const schema = basicSchema.and(imageSchema).and(passwordSchema);
 
 export type FormInputs = z.infer<typeof schema>;
