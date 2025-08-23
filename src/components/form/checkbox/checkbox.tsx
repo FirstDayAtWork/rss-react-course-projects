@@ -14,7 +14,7 @@ export default function Checkbox({
   data: CheckBoxData;
 }): JSX.Element {
   return (
-    <li className="list">
+    <li className={classes.list}>
       <input
         {...register(data.name)}
         className={classes.checkbox}

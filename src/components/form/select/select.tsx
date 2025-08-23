@@ -15,7 +15,7 @@ export default function Select({
   options: FormInputs['gender'][];
 }): JSX.Element {
   return (
-    <li className="list">
+    <li className={classes.list}>
       <label htmlFor={name} className={classes.label}>
         {name}
       </label>
