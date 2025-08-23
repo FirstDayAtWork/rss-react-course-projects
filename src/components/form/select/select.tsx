@@ -21,13 +21,7 @@ export default function Select({
         {name}
       </label>
 
-      <select
-        {...register(name)}
-        className={classes.select}
-        name={name}
-        id={name}
-        defaultValue={options[0]}
-      >
+      <select {...register(name)} className={classes.select} name={name} id={name}>
         {options.map((item, index) => (
           <option key={index} value={item}>
             {item}
@@ -35,7 +29,9 @@ export default function Select({
         ))}
       </select>
 
-      {error[name] && <div className={classes.error}>{error[name]?.message}</div>}
+      <div className={classes['error-wrapper']}>
+        {error[name] && <div className={classes.error}>{error[name]?.message}</div>}
+      </div>
     </li>
   );
 }

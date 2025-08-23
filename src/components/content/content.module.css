@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  place-content: center center;
+}
+
+.content {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  place-content: center center;
+
+  width: 320px;
+  padding: 5px;
+  border: 3px solid white;
+}

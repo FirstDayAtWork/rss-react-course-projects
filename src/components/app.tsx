@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { JSX } from 'react';
 import './app.css';
 import Modal from './modal/modal';
+import Content from './content/content';
 
 function App(): JSX.Element {
   const [isVisible, setVisible] = useState(false);
@@ -19,6 +20,7 @@ function App(): JSX.Element {
       <button type="button" onClick={openModal}>
         Open Modal
       </button>
+      <Content />
       <Modal dialogReference={dialogReference} isVisible={isVisible} setVisible={setVisible} />
     </>
   );

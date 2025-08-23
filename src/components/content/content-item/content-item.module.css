@@ -1,0 +1,22 @@
+.data {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  justify-content: center;
+
+  width: 100%;
+  padding: 0 20px 20px;
+
+  font-size: 0.9rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.image {
+  padding: 5px;
+  object-fit: cover;
+}

@@ -27,7 +27,9 @@ export default function Checkbox({
         {data.title}
       </label>
 
-      {error[data.name] && <div className={classes.error}>{error[data.name]?.message}</div>}
+      <div className={classes['error-wrapper']}>
+        {error[data.name] && <div className={classes.error}>{error[data.name]?.message}</div>}
+      </div>
     </li>
   );
 }

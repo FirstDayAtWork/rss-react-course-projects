@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import { type JSX } from 'react';
 import classes from './form.module.css';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -8,6 +8,8 @@ import { array, selectOptions, checkboxData } from '../../utility/input-types';
 import { schema, type FormInputs } from '../../zod/schema';
 import Select from './select/select';
 import Checkbox from './checkbox/checkbox';
+import { useFormDataStore } from '../../stores/store';
+import fileToBase64 from '../../utility/file-to-base64';
 
 type FormProps = {
   handleClose: () => void;
@@ -24,12 +26,15 @@ export default function Form(props: FormProps): JSX.Element {
     formState: { errors, isValid },
   } = useForm<FormInputs>({ mode: 'onChange', resolver: zodResolver(schema) });
 
+  const setData = useFormDataStore((state) => state.setItem);
+
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    if (data) {
-      console.log(data);
-      handleClose();
-      reset();
-    }
+    console.log(data);
+
+    fileToBase64({ data, setData });
+
+    handleClose();
+    reset();
   };
 
   return (

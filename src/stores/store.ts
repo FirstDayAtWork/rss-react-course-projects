@@ -2,10 +2,12 @@ import { create } from 'zustand';
 import type { FormInputs } from '../zod/schema';
 import { countries } from '../utility/countries';
 
+export type Item = FormInputs & { base64Img: string };
+
 type FormDataStore = {
   countries: typeof countries;
-  items: FormInputs[];
-  setItem: (item: FormInputs) => void;
+  items: Item[];
+  setItem: (item: Item) => void;
   removeItem: (name: string) => void;
   clearStore: () => void;
 };

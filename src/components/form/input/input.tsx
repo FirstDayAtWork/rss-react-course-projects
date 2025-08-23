@@ -61,7 +61,9 @@ export default function Input({
 
       {content[0] === 'country' && <DataList name={content[0]} />}
 
-      {error[content[0]] && <div className={classes.error}>{error[content[0]]?.message}</div>}
+      <div className={classes['error-wrapper']}>
+        {error[content[0]] && <div className={classes.error}>{error[content[0]]?.message}</div>}
+      </div>
     </li>
   );
 }
