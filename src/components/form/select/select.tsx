@@ -2,6 +2,7 @@ import type { JSX } from 'react';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 import classes from './select.module.css';
 import type { FormInputs } from '../../../zod/schema';
+import type { SelectOptions } from '../../../utility/input-types';
 
 export default function Select({
   register,
@@ -12,7 +13,7 @@ export default function Select({
   register: UseFormRegister<FormInputs>;
   error: FieldErrors<FormInputs>;
   name: keyof FormInputs;
-  options: FormInputs['gender'][];
+  options: SelectOptions;
 }): JSX.Element {
   return (
     <li className={classes.list}>
@@ -33,6 +34,7 @@ export default function Select({
           </option>
         ))}
       </select>
+
       {error[name] && <div className={classes.error}>{error[name]?.message}</div>}
     </li>
   );

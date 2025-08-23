@@ -1,11 +1,14 @@
 import z from 'zod';
+import { countries } from '../utility/countries';
+import { selectOptions } from '../utility/input-types';
 
 const basicSchema = z.object({
   name: z.string().regex(/^(?=[A-Z])[a-zA-Z]{1,72}$/, { error: 'Must be Capitalized!' }),
   age: z.number().nonnegative(),
   email: z.email(),
-  gender: z.enum(['human', 'undead', 'elf', 'orc']),
+  gender: z.enum(selectOptions, { error: 'Must be one from gender list' }),
   terms: z.literal(true, { error: 'Must be Checked!' }),
+  country: z.enum(countries, { error: 'Must be one from countries list' }),
 });
 
 const passwordSchema = z

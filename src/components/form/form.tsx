@@ -52,6 +52,7 @@ export default function Form(props: FormProps): JSX.Element {
           <Checkbox key={item.name} register={register} error={errors} data={item} />
         ))}
       </ul>
+
       <button className={[!isValid && 'disabled', ''].join(' ')} disabled={!isValid} type="submit">
         Submit
       </button>

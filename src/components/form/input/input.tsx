@@ -2,6 +2,7 @@ import type { ChangeEvent, JSX } from 'react';
 import type { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import classes from './input.module.css';
 import type { FormInputs } from '../../../zod/schema';
+import { DataList } from '../datalist/datalist';
 
 export default function Input({
   register,
@@ -54,8 +55,11 @@ export default function Input({
           className={classes.input}
           id={content[0]}
           name={content[0]}
+          {...(content[0] === 'country' && { list: content[0] + '.' })}
         />
       )}
+
+      {content[0] === 'country' && <DataList name={content[0]} />}
 
       {error[content[0]] && <div className={classes.error}>{error[content[0]]?.message}</div>}
     </li>
