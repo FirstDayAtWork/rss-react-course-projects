@@ -2,13 +2,13 @@ import { type JSX } from 'react';
 import classes from './form.module.css';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
+import { schema, type FormInputs } from '../../zod/schema';
+import { useFormDataStore } from '../../stores/store';
 import Input from './input/input';
 import { array, selectOptions, checkboxData } from '../../utility/input-types';
-import { schema, type FormInputs } from '../../zod/schema';
 import Select from './select/select';
 import Checkbox from './checkbox/checkbox';
-import { useFormDataStore } from '../../stores/store';
 import fileToBase64 from '../../utility/file-to-base64';
 
 type FormProps = {
@@ -24,7 +24,7 @@ export default function Form(props: FormProps): JSX.Element {
     reset,
     setValue,
     formState: { errors, isValid },
-  } = useForm<FormInputs>({ mode: 'onChange', resolver: zodResolver(schema) });
+  } = useForm<FormInputs>({ mode: 'onChange', resolver: standardSchemaResolver(schema) });
 
   const setData = useFormDataStore((state) => state.setItem);
 

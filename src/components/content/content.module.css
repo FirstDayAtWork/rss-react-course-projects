@@ -17,7 +17,16 @@
   padding: 3px;
   border-image: url('pics/Border-gold.png') 8 9 / 8px / 8px repeat;
 
+  opacity: 0.8;
   background-image: url('pics/Leather-bg.png');
+
+  transition: 0.5s ease;
+}
+
+.content:hover {
+  transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 0 20px 12px var(--font-color-1);
 }
 
 .content:last-of-type {

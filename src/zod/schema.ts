@@ -8,7 +8,10 @@ const imageSchema = z
   .max(1_000_000, { error: 'Max 1MB' });
 
 const basicSchema = z.object({
-  name: z.string().regex(/^(?=[A-Z])[a-zA-Z]{1,72}$/, { error: 'Must be Capitalized!' }),
+  name: z
+    .string()
+    .regex(/^(?=[A-Z])/, { error: 'Must be Capitalized!' })
+    .regex(/[a-zA-Z]{1,72}$/, { error: 'Use alphabet letters!' }),
   email: z.email(),
   age: z.number().nonnegative(),
   gender: z.enum(selectOptions),
