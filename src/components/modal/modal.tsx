@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import type { Dispatch, JSX, Ref, SetStateAction } from 'react';
 import classes from './modal.module.css';
 import Form from '../form/form';
+import type { MouseEvent } from 'react';
 
 type ModalProps = {
   dialogReference: Ref<HTMLDialogElement> | undefined;
@@ -30,17 +31,29 @@ export default function Modal(props: ModalProps): JSX.Element {
     }
   }
 
+  function handleBlur(event: MouseEvent<HTMLDialogElement>): void {
+    if (event.target instanceof HTMLDialogElement && event.target.tagName === 'DIALOG') {
+      handleClose();
+    }
+  }
+
   return createPortal(
-    <dialog ref={dialogReference} onKeyDown={handleEscape} className={classes.modal}>
+    <dialog
+      onClick={handleBlur}
+      ref={dialogReference}
+      onKeyDown={handleEscape}
+      className={classes.modal}
+    >
       {isVisible && (
         <>
           <div className={classes.head}>
-            <span className={classes['head-txt']}>Sample123</span>
+            <span className={classes['head-txt']}>Modal</span>
             <button
               type="button"
               name="close-modal"
               className={classes['close-btn']}
               onClick={handleClose}
+              title="Close Modal"
             ></button>
           </div>
           <Form handleClose={handleClose} />

@@ -20,6 +20,46 @@ export const checkboxData: CheckBoxData[] = [
   { name: 'terms', title: 'Accept Terms and Conditions agreement' },
 ];
 
-export type SelectOptions = ['human', 'undead', 'elf', 'orc'];
+export type SelectOptions = [
+  'Demon',
+  'Dwarf',
+  'Efreet',
+  'Elf',
+  'Genie',
+  'Gnoll',
+  'Goblin',
+  'Human',
+  'Lich',
+  'Lizardman',
+  'Minotaur',
+  'Ogre',
+  'Troglodyte',
+  'Vampire',
+  'Nymph',
+  'Nix',
+  'Halfling',
+  'Dark Elf',
+  'Gremlin',
+];
 
-export const selectOptions: SelectOptions = ['human', 'undead', 'elf', 'orc'];
+export const selectOptions: SelectOptions = [
+  'Demon',
+  'Dwarf',
+  'Efreet',
+  'Elf',
+  'Genie',
+  'Gnoll',
+  'Goblin',
+  'Human',
+  'Lich',
+  'Lizardman',
+  'Minotaur',
+  'Ogre',
+  'Troglodyte',
+  'Vampire',
+  'Nymph',
+  'Nix',
+  'Halfling',
+  'Dark Elf',
+  'Gremlin',
+];

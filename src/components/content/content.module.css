@@ -1,16 +1,29 @@
 .wrapper {
   display: flex;
-  gap: 20px;
+  flex-flow: row wrap;
+  gap: 40px;
   place-content: center center;
+
+  margin: 20px 0;
 }
 
 .content {
   display: flex;
   flex-flow: column nowrap;
-  gap: 10px;
+  gap: 5px;
   place-content: center center;
 
   width: 320px;
-  padding: 5px;
-  border: 3px solid white;
+  padding: 3px;
+  border-image: url('pics/Border-gold.png') 8 9 / 8px / 8px repeat;
+
+  background-image: url('pics/Leather-bg.png');
+}
+
+.content:last-of-type {
+  border-image: url('pics/Border-red.png') 8 9 / 8px / 8px repeat;
+}
+
+.image {
+  border-image: url('pics/Border-gold.png') 4 4 / 4px / 4px repeat;
 }

@@ -1,3 +1,64 @@
 .form {
   display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.form > ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr) 0.5fr;
+
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.form > ul > li:nth-of-type(9) {
+  grid-column: span 2 / span 2;
+  order: 9;
+}
+
+.form > ul > li:nth-of-type(1) {
+  order: 1;
+}
+
+.form > ul > li:nth-of-type(2) {
+  order: 2;
+}
+
+.form > ul > li:nth-of-type(3) {
+  order: 3;
+}
+
+.form > ul > li:nth-of-type(4) {
+  order: 5;
+}
+
+.form > ul > li:nth-of-type(5) {
+  order: 6;
+}
+
+.form > ul > li:nth-of-type(6) {
+  order: 8;
+}
+
+.form > ul > li:nth-of-type(7) {
+  order: 4;
+}
+
+.form > ul > li:nth-of-type(8) {
+  order: 7;
+}
+
+@media screen and (width <= 678px) {
+  .form > ul {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(8, 1fr) 0.5fr;
+  }
+
+  .form > ul > li:nth-of-type(9) {
+    grid-column: auto;
+  }
 }

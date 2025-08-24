@@ -58,7 +58,11 @@ export default function Form(props: FormProps): JSX.Element {
         ))}
       </ul>
 
-      <button className={[!isValid && 'disabled', ''].join(' ')} disabled={!isValid} type="submit">
+      <button
+        className={['btn-style', !isValid && 'disabled', ''].join(' ')}
+        disabled={!isValid}
+        type="submit"
+      >
         Submit
       </button>
     </form>

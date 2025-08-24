@@ -17,9 +17,11 @@ function App(): JSX.Element {
 
   return (
     <>
-      <button type="button" onClick={openModal}>
-        Open Modal
-      </button>
+      <nav className="navbar">
+        <button className={['btn-style', 'small-btn'].join(' ')} type="button" onClick={openModal}>
+          Modal
+        </button>
+      </nav>
       <Content />
       <Modal dialogReference={dialogReference} isVisible={isVisible} setVisible={setVisible} />
     </>
