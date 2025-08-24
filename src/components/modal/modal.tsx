@@ -49,7 +49,9 @@ export default function Modal(props: ModalProps): JSX.Element {
       {isVisible.basic && (
         <>
           <div className={classes.head} key={'basic'}>
-            <span className={classes['head-txt']}>Basic</span>
+            <span data-testid="basic" className={classes['head-txt']}>
+              Basic
+            </span>
             <button
               type="button"
               name="close-modal"
@@ -65,7 +67,9 @@ export default function Modal(props: ModalProps): JSX.Element {
       {isVisible.advance && (
         <>
           <div className={classes.head} key={'advance'}>
-            <span className={classes['head-txt']}>Advance</span>
+            <span data-testid="advance" className={classes['head-txt']}>
+              Advance
+            </span>
             <button
               type="button"
               name="close-modal"
