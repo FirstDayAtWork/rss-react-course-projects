@@ -13,9 +13,19 @@ const basicSchema = z.object({
     .regex(/^(?=[A-Z])/, { error: 'Must be Capitalized!' })
     .regex(/[a-zA-Z]{1,72}$/, { error: 'Use alphabet letters!' }),
   email: z.email(),
-  age: z.number().nonnegative(),
+  age: z
+    .union([z.string(), z.number('')])
+    .transform((value) => {
+      return typeof value === 'string' ? +value : value;
+    })
+    .refine((value) => value >= 0, { error: 'Must be positive ', path: ['age'] }),
   gender: z.enum(selectOptions),
-  terms: z.literal(true, { error: 'Must be Checked!' }),
+  terms: z
+    .union([z.string(), z.boolean('')])
+    .transform((value) => {
+      return typeof value === 'string' ? value === 'on' : value;
+    })
+    .refine((value) => !!value, { error: 'Must be checked! ', path: ['terms'] }),
   country: z.enum(countries, { error: 'Must be one from countries list' }),
   image: imageSchema,
 });

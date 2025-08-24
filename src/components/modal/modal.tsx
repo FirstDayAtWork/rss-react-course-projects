@@ -3,11 +3,13 @@ import type { Dispatch, JSX, Ref, SetStateAction } from 'react';
 import classes from './modal.module.css';
 import Form from '../form/form';
 import type { MouseEvent } from 'react';
+import type { ModalVisible } from '../app';
+import BasicForm from '../basic-form/basic-form';
 
 type ModalProps = {
   dialogReference: Ref<HTMLDialogElement> | undefined;
-  isVisible: boolean;
-  setVisible: Dispatch<SetStateAction<boolean>>;
+  isVisible: ModalVisible;
+  setVisible: Dispatch<SetStateAction<ModalVisible>>;
 };
 
 export default function Modal(props: ModalProps): JSX.Element {
@@ -17,7 +19,7 @@ export default function Modal(props: ModalProps): JSX.Element {
     if (!dialogReference) return;
 
     if (event.key === 'Escape' && 'current' in dialogReference) {
-      setVisible(false);
+      setVisible({ basic: false, advance: false });
       dialogReference?.current?.close();
     }
   }
@@ -26,7 +28,7 @@ export default function Modal(props: ModalProps): JSX.Element {
     if (!dialogReference) return;
 
     if ('current' in dialogReference) {
-      setVisible(false);
+      setVisible({ basic: false, advance: false });
       dialogReference?.current?.close();
     }
   }
@@ -44,10 +46,26 @@ export default function Modal(props: ModalProps): JSX.Element {
       onKeyDown={handleEscape}
       className={classes.modal}
     >
-      {isVisible && (
+      {isVisible.basic && (
         <>
-          <div className={classes.head}>
-            <span className={classes['head-txt']}>Modal</span>
+          <div className={classes.head} key={'basic'}>
+            <span className={classes['head-txt']}>Basic</span>
+            <button
+              type="button"
+              name="close-modal"
+              className={classes['close-btn']}
+              onClick={handleClose}
+              title="Close Modal"
+            ></button>
+          </div>
+          <BasicForm handleClose={handleClose} />
+        </>
+      )}
+
+      {isVisible.advance && (
+        <>
+          <div className={classes.head} key={'advance'}>
+            <span className={classes['head-txt']}>Advance</span>
             <button
               type="button"
               name="close-modal"
