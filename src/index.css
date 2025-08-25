@@ -1,9 +1,68 @@
+:root {
+  --font-color-1: #f7de7b;
+  --font-color-2: #efeff1;
+  --err-color: #b90909;
+  --succ-color: #09b909;
+  --disabled-bg-color: rgb(71 71 71 / 40%);
+  --disabled-color: rgb(104 104 104 / 40%);
+}
+
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   color-scheme: dark;
 }
 
 body {
   min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  gap: 10px;
+
+  padding: 8px 12px;
+  border-bottom: 1px solid rgb(65 65 65);
+
+  background-image: url('/pics/Marble-dark-bg.png');
+}
+
+.btn-style {
+  min-width: 290px;
+  height: 50px;
+
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1c1c1c;
+  text-transform: uppercase;
+
+  background-image: url('pics/Button-temp.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.btn-style:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.small-btn {
+  min-width: 150px;
+  height: 35px;
+
+  font-size: 1.6rem;
+  text-wrap: nowrap;
+
+  background-size: cover;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+
+  color: var(--disabled-color) !important;
+
+  background-color: var(--disabled-bg-color) !important;
+  filter: grayscale(80%) brightness(80%);
 }

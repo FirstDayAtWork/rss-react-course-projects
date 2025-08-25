@@ -1,0 +1,41 @@
+.data {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  justify-content: center;
+
+  width: 100%;
+  padding: 20px;
+  border-image: url('pics/Border-gold.png') 4 4 / 4px / 4px repeat;
+
+  font-size: 0.9rem;
+
+  background-image: url('pics/Leather-extra-dark-bg.png');
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.key,
+.value {
+  overflow: hidden;
+  width: 50%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.key {
+  color: var(--font-color-2);
+}
+
+.value {
+  color: white;
+  text-align: end;
+}
+
+.image {
+  padding: 5px;
+  object-fit: cover;
+}
