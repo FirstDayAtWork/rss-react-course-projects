@@ -255,3 +255,12 @@ export const countryNames = [
   'Zambia ',
   'Zimbabwe ',
 ] as const;
+
+export const tableHeaderNames = [
+  'Country',
+  'ISO',
+  'Population',
+  'Year',
+  'CO2',
+  'CO2_PER_CAPITA',
+] as const;

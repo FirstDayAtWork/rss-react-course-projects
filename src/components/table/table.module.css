@@ -1,3 +1,33 @@
 .table {
-  display: flex;
+  cursor: text;
+
+  border-collapse: collapse;
+
+  width: 100%;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #eef1f3;
+  text-align: left;
+
+  opacity: 1;
+  background-color: transparent;
+}
+
+.wrapper {
+  border-bottom: 1px solid #ddd;
+}
+
+.col,
+.row {
+  line-height: 1.5em;
+}
+
+tbody > .wrapper {
+  height: 60px;
+  border-bottom: 1px solid #dddddd2e;
+}
+
+tbody > .wrapper:hover {
+  background-color: #151b23;
 }
