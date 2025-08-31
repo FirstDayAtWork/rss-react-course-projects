@@ -1,14 +1,14 @@
-import { useEffect, useState, type JSX } from 'react';
-import type { Data } from '../../api/get-data';
+import { useEffect, useState, Fragment } from 'react';
+import type { JSX, MouseEvent } from 'react';
 import { getData } from '../../api/get-data';
 import { useQuery } from '../../hooks/use-query';
 import { tableHeaderNames } from '../../utility/country-names';
 import { isKeyOfType } from '../../utility/key-of-type';
 import classes from './table.module.css';
+import Popover from '../popover/popover';
+import { filterByYear, sortBy } from '../../utility/helpers';
 
-function filterByYear(data: Data[], year: number): Data[] {
-  return data.filter((item) => item.year === year);
-}
+const sortActions = ['ascending', 'descending', 'default'];
 
 type TableProps = {
   year: number;
@@ -19,6 +19,7 @@ export default function Table(props: TableProps): JSX.Element {
   const { year, search } = props;
 
   const [isNewData, setStatus] = useState(false);
+  const [sortType, setSortType] = useState('default');
 
   useEffect(() => {
     setStatus(true);
@@ -37,36 +38,59 @@ export default function Table(props: TableProps): JSX.Element {
     key: 'data',
   });
 
-  const countries = Object.keys(data).filter((item) =>
-    item.toLowerCase().startsWith(search.toLowerCase()),
+  const filtered = Object.entries(data).filter((item) =>
+    item[0].toLowerCase().startsWith(search.toLowerCase()),
   );
+
+  const dataByYear: typeof filtered = filtered.map((item) => {
+    return [
+      item[0],
+      {
+        iso_code: item[1].iso_code,
+        data: filterByYear(item[1].data, year) || [],
+      },
+    ];
+  });
+
+  const sorted = sortBy(dataByYear, sortType);
+
+  function handlePopulation(event: MouseEvent<HTMLDivElement>): void {
+    if (event.target instanceof HTMLButtonElement) {
+      setSortType(event.target.dataset.value ?? '');
+    }
+  }
 
   return (
     <table className={classes.table}>
       <thead>
         <tr className={classes.wrapper}>
           {tableHeaderNames.map((item) => (
-            <th className={classes.col} scope="col" key={item}>
-              {item}
-            </th>
+            <Fragment key={item}>
+              {item === 'Population' ? (
+                <th className={`${classes.col} ${classes.clickable}`} scope="col">
+                  {item}
+                  <Popover actions={sortActions} callback={handlePopulation} />
+                </th>
+              ) : (
+                <th className={`${classes.col}`} scope="col">
+                  {item}
+                </th>
+              )}
+            </Fragment>
           ))}
         </tr>
       </thead>
       <tbody>
-        {countries.map((country) => {
-          const filtered = filterByYear(data[country].data, year) || [];
-
-          if (filtered.length === 0) return;
-
+        {sorted.map((country) => {
           return (
-            <tr key={country} className={`${classes.wrapper} `}>
+            <tr key={country[0]} className={`${classes.wrapper} `}>
               {tableHeaderNames.map((item, index) => {
                 const dataKey = item.toLowerCase();
 
                 if (index === 0) {
                   return (
-                    <td className={classes.row} scope="row" key={item + '.'} title={country}>
-                      {country.length > 20 ? country.slice(0, 20) + '...' : country}
+                    <td className={classes.row} scope="row" key={item + '.'} title={country[0]}>
+                      {country[0].length > 20 ? country[0].slice(0, 20) + '...' : country[0]}
                     </td>
                   );
                 }
@@ -74,7 +98,7 @@ export default function Table(props: TableProps): JSX.Element {
                 if (index === 1) {
                   return (
                     <td className={classes.row} scope="row" key={item + '.'}>
-                      {data[country].iso_code || 'N/A'}
+                      {country[1].iso_code || 'N/A'}
                     </td>
                   );
                 }
@@ -85,7 +109,10 @@ export default function Table(props: TableProps): JSX.Element {
                     scope="row"
                     key={item + '.'}
                   >
-                    {(isKeyOfType(filtered[0], dataKey) && filtered[0][dataKey]) || 'N/A'}
+                    {(country[1].data[0] &&
+                      isKeyOfType(country[1].data[0], dataKey) &&
+                      country[1].data[0][dataKey]) ||
+                      'N/A'}
                   </td>
                 );
               })}

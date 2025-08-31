@@ -36,3 +36,12 @@ tbody > .wrapper:hover {
   color: #56d364;
   transition: ease 0.5s;
 }
+
+.clickable {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* color: #ffa657; */
+}

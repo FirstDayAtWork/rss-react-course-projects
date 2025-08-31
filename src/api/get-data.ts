@@ -2,14 +2,14 @@ import type { countryNames } from '../utility/country-names';
 
 export type CO2DATA = Record<string, DataIso>;
 
-type DataIso = {
+export type DataIso = {
   iso_code: string;
   data: Data[];
 };
 
 export type Data = {
   year: number;
-  population: number;
+  population: number | string;
   cement_co2: number;
   cement_co2_per_capita: number;
   co2: number;

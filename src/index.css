@@ -1,3 +1,27 @@
+:root {
+  --font-color: #eef1f3;
+  --bg-color: #0d1117;
+  --code-bg-color: #161b22;
+  --code-count-color: #30363d;
+  --var-color: #3b82f6;
+  --func-name-color: #f87171;
+  --comment-color: #708090;
+  --string-color: #22c55e;
+  --keyword-color: #bd2cbd;
+  --link-color: #690;
+  --templata-lit-color: #5254df;
+  --err-color: #ef5350;
+  --succ-color: #4caf50;
+  --btn-bg-color: #3ac267;
+  --btn-bg-hoover: #1f8860e5;
+  --border-color: #30363d;
+  --bg-hover-color: #30363d;
+  --popover-bg-color: #fffffff5;
+  --popover-color: #001a34e5;
+  --disabled-bg-color: rgb(71 71 71 / 40%);
+  --disabled-color: rgb(104 104 104 / 40%);
+}
+
 * {
   box-sizing: border-box;
   font-family: MatterMono, monospace;
