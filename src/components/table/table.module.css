@@ -31,3 +31,8 @@ tbody > .wrapper {
 tbody > .wrapper:hover {
   background-color: #151b23;
 }
+
+.highlight {
+  color: #56d364;
+  transition: ease 0.5s;
+}

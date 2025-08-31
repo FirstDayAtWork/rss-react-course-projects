@@ -1,15 +1,22 @@
-import { Suspense, type JSX } from 'react';
+import { Suspense, useState, type JSX } from 'react';
 import './app.css';
 import Table from './table/table';
 import { SkeletonTable } from '../ui/skeleton/table-skeleton';
 import { countryNames } from '../utility/country-names';
+import YearSelector from './year-selector/year-selector';
+import ErrorBoundry from './error-boundry/error-boundry';
 
 function App(): JSX.Element {
+  const [year, setYear] = useState(2023);
+
   return (
     <div className="app">
-      <Suspense fallback={<SkeletonTable length={countryNames.length} />}>
-        <Table />
-      </Suspense>
+      <ErrorBoundry>
+        <YearSelector year={year} setYear={setYear} />
+        <Suspense fallback={<SkeletonTable length={countryNames.length} />}>
+          <Table year={year} />
+        </Suspense>
+      </ErrorBoundry>
     </div>
   );
 }
