@@ -12,10 +12,11 @@ function filterByYear(data: Data[], year: number): Data[] {
 
 type TableProps = {
   year: number;
+  search: string;
 };
 
 export default function Table(props: TableProps): JSX.Element {
-  const { year } = props;
+  const { year, search } = props;
 
   const [isNewData, setStatus] = useState(false);
 
@@ -36,7 +37,9 @@ export default function Table(props: TableProps): JSX.Element {
     key: 'data',
   });
 
-  const countries = Object.keys(data);
+  const countries = Object.keys(data).filter((item) =>
+    item.toLowerCase().startsWith(search.toLowerCase()),
+  );
 
   return (
     <table className={classes.table}>

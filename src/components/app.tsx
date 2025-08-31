@@ -5,16 +5,21 @@ import { SkeletonTable } from '../ui/skeleton/table-skeleton';
 import { countryNames } from '../utility/country-names';
 import YearSelector from './year-selector/year-selector';
 import ErrorBoundry from './error-boundry/error-boundry';
+import Search from './search/search';
 
 function App(): JSX.Element {
   const [year, setYear] = useState(2023);
+  const [search, setSearch] = useState('');
 
   return (
     <div className="app">
       <ErrorBoundry>
-        <YearSelector year={year} setYear={setYear} />
+        <header className="header">
+          <YearSelector year={year} setYear={setYear} />
+          <Search setSearch={setSearch} />
+        </header>
         <Suspense fallback={<SkeletonTable length={countryNames.length} />}>
-          <Table year={year} />
+          <Table year={year} search={search} />
         </Suspense>
       </ErrorBoundry>
     </div>
