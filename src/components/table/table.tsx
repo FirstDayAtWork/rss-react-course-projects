@@ -13,10 +13,11 @@ const sortActions = ['ascending', 'descending', 'default'];
 type TableProps = {
   year: number;
   search: string;
+  cells: string[];
 };
 
 export default function Table(props: TableProps): JSX.Element {
-  const { year, search } = props;
+  const { year, search, cells } = props;
 
   const [isNewData, setStatus] = useState(false);
   const [sortType, setSortType] = useState('default');
@@ -64,7 +65,7 @@ export default function Table(props: TableProps): JSX.Element {
     <table className={classes.table}>
       <thead>
         <tr className={classes.wrapper}>
-          {tableHeaderNames.map((item) => (
+          {[...tableHeaderNames, ...cells].map((item) => (
             <Fragment key={item}>
               {item === 'Population' ? (
                 <th className={`${classes.col} ${classes.clickable}`} scope="col">
@@ -84,7 +85,7 @@ export default function Table(props: TableProps): JSX.Element {
         {sorted.map((country) => {
           return (
             <tr key={country[0]} className={`${classes.wrapper} `}>
-              {tableHeaderNames.map((item, index) => {
+              {[...tableHeaderNames, ...cells].map((item, index) => {
                 const dataKey = item.toLowerCase();
 
                 if (index === 0) {

@@ -264,3 +264,13 @@ export const tableHeaderNames = [
   'CO2',
   'CO2_PER_CAPITA',
 ] as const;
+
+export const cells = [
+  'cement_co2',
+  'cement_co2_per_capita',
+  'coal_co2_per_capita',
+  'gas_co2',
+  'gas_co2_per_capita',
+  'oil_co2',
+  'oil_co2_per_capita',
+] as const;

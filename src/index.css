@@ -36,3 +36,23 @@
 body {
   min-height: 100vh;
 }
+
+.cell-btn {
+  width: 160px;
+  height: 52px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 1.2rem;
+  color: white;
+
+  background: linear-gradient(335deg, transparent, rgb(187 184 22 / 85.6%), transparent);
+
+  transition: 0.5s ease;
+}
+
+.cell-btn:hover {
+  cursor: pointer;
+  background-color: rgb(141 139 14 / 85.6%);
+}

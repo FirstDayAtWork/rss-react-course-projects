@@ -10,10 +10,10 @@ export type DataIso = {
 export type Data = {
   year: number;
   population: number | string;
-  cement_co2: number;
-  cement_co2_per_capita: number;
   co2: number;
   co2_per_capita: number;
+  cement_co2: number;
+  cement_co2_per_capita: number;
   coal_co2_per_capita: number;
   gas_co2: number;
   gas_co2_per_capita: number;
