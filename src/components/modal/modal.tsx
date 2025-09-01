@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useRef } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import type { Dispatch, FormEvent, JSX, Ref, SetStateAction } from 'react';
 import classes from './modal.module.css';
 import type { MouseEvent } from 'react';
@@ -10,7 +10,7 @@ type ModalProps = {
   setCells: Dispatch<SetStateAction<string[]>>;
 };
 
-export default function Modal(props: ModalProps): JSX.Element {
+function Modal(props: ModalProps): JSX.Element {
   const { dialogReference, setCells } = props;
 
   const formReference = useRef<HTMLFormElement>(null);
@@ -37,20 +37,23 @@ export default function Modal(props: ModalProps): JSX.Element {
     }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-    if (formReference.current instanceof HTMLFormElement) {
-      const formData = new FormData(formReference.current);
-      const data = Object.keys(Object.fromEntries(formData));
-      setCells(data);
-      handleClose();
-    }
-  }
+      if (formReference.current instanceof HTMLFormElement) {
+        const formData = new FormData(formReference.current);
+        const data = Object.keys(Object.fromEntries(formData));
+        setCells(data);
+        handleClose();
+      }
+    },
+    [setCells],
+  );
 
   return createPortal(
     <dialog
-      onClick={handleBlur}
+      onMouseDown={handleBlur}
       ref={dialogReference}
       onKeyDown={handleEscape}
       className={classes.modal}
@@ -85,3 +88,5 @@ export default function Modal(props: ModalProps): JSX.Element {
     document.body,
   );
 }
+
+export default memo(Modal);

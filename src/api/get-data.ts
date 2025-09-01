@@ -1,5 +1,3 @@
-import type { countryNames } from '../utility/country-names';
-
 export type CO2DATA = Record<string, DataIso>;
 
 export type DataIso = {
@@ -23,12 +21,6 @@ export type Data = {
 
 export async function getData(): Promise<CO2DATA> {
   const url = `https://raw.githubusercontent.com/FirstDayAtWork/co2_data/refs/heads/main/data.json`;
-  const response = await fetch(url);
-  return response.json();
-}
-
-export async function getCountryData(country: (typeof countryNames)[number]): Promise<CO2DATA> {
-  const url = `https://raw.githubusercontent.com/FirstDayAtWork/co2_data/refs/heads/main/countries/${country.replaceAll(' ', '')}.json`;
   const response = await fetch(url);
   return response.json();
 }

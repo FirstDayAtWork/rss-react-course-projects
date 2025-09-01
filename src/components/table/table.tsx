@@ -1,7 +1,7 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useMemo, useCallback, memo } from 'react';
 import type { JSX, MouseEvent } from 'react';
 import { getData } from '../../api/get-data';
-import { useQuery } from '../../hooks/use-query';
+import { useHandMadeQuery } from '../../hooks/use-hand-made-query';
 import { tableHeaderNames } from '../../utility/country-names';
 import { isKeyOfType } from '../../utility/key-of-type';
 import classes from './table.module.css';
@@ -16,7 +16,7 @@ type TableProps = {
   cells: string[];
 };
 
-export default function Table(props: TableProps): JSX.Element {
+function Table(props: TableProps): JSX.Element {
   const { year, search, cells } = props;
 
   const [isNewData, setStatus] = useState(false);
@@ -34,32 +34,38 @@ export default function Table(props: TableProps): JSX.Element {
     };
   }, [year]);
 
-  const data = useQuery({
+  const data = useHandMadeQuery({
     fn: () => getData(),
     key: 'data',
   });
 
-  const filtered = Object.entries(data).filter((item) =>
-    item[0].toLowerCase().startsWith(search.toLowerCase()),
+  const filtered = useMemo(
+    () =>
+      Object.entries(data).filter((item) => item[0].toLowerCase().startsWith(search.toLowerCase())),
+    [data, search],
   );
 
-  const dataByYear: typeof filtered = filtered.map((item) => {
-    return [
-      item[0],
-      {
-        iso_code: item[1].iso_code,
-        data: filterByYear(item[1].data, year) || [],
-      },
-    ];
-  });
+  const dataByYear: typeof filtered = useMemo(
+    () =>
+      filtered.map((item) => {
+        return [
+          item[0],
+          {
+            iso_code: item[1].iso_code,
+            data: filterByYear(item[1].data, year) || [],
+          },
+        ];
+      }),
+    [filtered, year],
+  );
 
-  const sorted = sortBy(dataByYear, sortType);
+  const sorted = useMemo(() => sortBy(dataByYear, sortType), [dataByYear, sortType]);
 
-  function handlePopulation(event: MouseEvent<HTMLDivElement>): void {
+  const handlePopulation = useCallback((event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof HTMLButtonElement) {
       setSortType(event.target.dataset.value ?? '');
     }
-  }
+  }, []);
 
   return (
     <table className={classes.table}>
@@ -124,3 +130,5 @@ export default function Table(props: TableProps): JSX.Element {
     </table>
   );
 }
+
+export default memo(Table);

@@ -2,7 +2,7 @@ import { use } from 'react';
 
 const map = new Map<string, Promise<unknown>>();
 
-export function useQuery<T>({ fn, key }: { fn: () => Promise<T>; key: string }): T {
+export function useHandMadeQuery<T>({ fn, key }: { fn: () => Promise<T>; key: string }): T {
   if (!map.has(key)) {
     map.set(key, fn());
   }

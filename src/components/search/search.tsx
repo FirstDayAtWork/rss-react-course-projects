@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState, memo } from 'react';
 import type { ChangeEvent, Dispatch, JSX, SetStateAction, KeyboardEvent } from 'react';
 import classes from './search.module.css';
 
@@ -6,18 +6,18 @@ type SeachProps = {
   setSearch: Dispatch<SetStateAction<string>>;
 };
 
-export default function Search(props: SeachProps): JSX.Element {
+function Search(props: SeachProps): JSX.Element {
   const { setSearch } = props;
 
   const [value, setValue] = useState('');
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setValue(event?.target.value.trim());
-  }
+  }, []);
 
-  function handleClick(): void {
+  const handleClick = useCallback(() => {
     setSearch(value);
-  }
+  }, [value]);
 
   function handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
@@ -44,3 +44,5 @@ export default function Search(props: SeachProps): JSX.Element {
     </div>
   );
 }
+
+export default memo(Search);

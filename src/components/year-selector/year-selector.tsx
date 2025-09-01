@@ -1,4 +1,5 @@
 import type { ChangeEvent, Dispatch, JSX, SetStateAction } from 'react';
+import { useCallback, memo } from 'react';
 import classes from './year-selector.module.css';
 import { createYearRange } from '../../utility/years';
 
@@ -9,12 +10,15 @@ type YearSelectorProps = {
   setYear: Dispatch<SetStateAction<number>>;
 };
 
-export default function YearSelector(props: YearSelectorProps): JSX.Element {
+function YearSelector(props: YearSelectorProps): JSX.Element {
   const { year, setYear } = props;
 
-  function handleChange(event: ChangeEvent<HTMLSelectElement>): void {
-    setYear(+event.target.value);
-  }
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>): void => {
+      setYear(+event.target.value);
+    },
+    [setYear],
+  );
 
   return (
     <select onChange={handleChange} className={classes.select} value={year} name={'year-selector'}>
@@ -26,3 +30,5 @@ export default function YearSelector(props: YearSelectorProps): JSX.Element {
     </select>
   );
 }
+
+export default memo(YearSelector);
