@@ -1,107 +1,20 @@
-# Rsschool React Course Project
+# Performance
 
-## Technologies
+## First render
 
-**Framework:** [React](https://react.dev/)
+<img src="./public/screens/table_load.JPG" />
+<img src="./public/screens/table_load_2.JPG" />
 
-**Language:** [TypeScript](https://www.typescriptlang.org/)
+## Filter by Year
 
-**Styles:** [CSS](https://www.w3schools.com/css/css_intro.asp)
+<img src="./public/screens/years.JPG" />
 
-**Bundler:** [Vite](https://vite.dev/)
+## Search by name
 
-**Tests:** [Vitest](https://vitest.dev/)
+<img src="./public/screens/search.JPG" />
 
-**API:** [DummyJson](https://dummyjson.com/)
+## Add cells to the table
 
-**Code Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+<img src="./public/screens/add_cells.JPG" />
 
-**Git Hooks:** [Husky](https://typicode.github.io/husky/)
-
-## Scripts
-
-Opens the application in the development mode:
-
-```bash
-npm run dev
-```
-
-Creates a build directory with a production build of the application:
-
-```bash
-npm run build
-```
-
-Allows to preview the production build locally:
-
-```bash
-npm run preview
-```
-
-Installs Husky:
-
-```bash
-npm run prepare
-```
-
-Lints the application with ESLint:
-
-```bash
-npm run lint
-```
-
-Fixes the linting errors and warnings:
-
-```bash
-npm run lint:fix
-```
-
-Formats the application with Prettier:
-
-```bash
-npm run format:fix
-```
-
-Checks CSS styles according to Stylelint rules:
-
-```bash
-npm run check-style
-```
-
-Fixes CSS styles according to Stylelint rules:
-
-```bash
-npm run fix-style
-```
-
-Checks the files before committing code changes:
-
-```bash
-npm run pre-commit
-```
-
-Runs Vitest tests:
-
-```bash
-npm run test
-```
-
-Reports Vitest tests coverage:
-
-```bash
-npm run coverage
-```
-
-## Set Up
-
-- Clone the repository to your computer using this command:
-
-```bash
-git clone https://github.com/FirstDayAtWork/rss-react-course-projects.git
-```
-
-- Install the dependencies by running the following command:
-
-```bash
-npm install
-```
+<p>Overall I think that my App render speed is ok so I probably don't need to use optimisations. </p>
