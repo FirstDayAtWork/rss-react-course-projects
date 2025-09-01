@@ -51,6 +51,6 @@
 
 ### After
 
-<img src="./public/screens/after/add_cells.JPG" />
+<img src="./public/screens/after/cells.JPG" />
 
 <p>So it gets sligtly worse everywhere except Search component! We get 4 rerenders instead of 7! WOWZERS!!! </p>
