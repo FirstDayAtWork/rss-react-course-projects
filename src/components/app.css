@@ -1,4 +1,18 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #0d1117;
+}
+
+.app {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
 }

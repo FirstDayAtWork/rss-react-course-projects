@@ -1,0 +1,97 @@
+.modal {
+  min-width: 360px;
+  max-width: 768px;
+  border: 1px solid var(--border-color);
+  border-radius: 17px;
+
+  color: var(--font-color);
+
+  background-color: var(--code-bg-color);
+}
+
+.modal::backdrop {
+  background-color: rgb(0 0 0 / 60%);
+  backdrop-filter: blur(2px);
+}
+
+.head {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 10px 10px 5px;
+}
+
+.head-txt {
+  margin-left: 10px;
+  font-size: 2rem;
+  color: white;
+}
+
+.close-btn {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+
+  background-color: inherit;
+}
+
+.close-btn::after {
+  content: url('/icons/cross_48.svg');
+  width: 48px;
+  height: 48px;
+}
+
+.form {
+  padding: 20px;
+}
+
+.list {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  padding: 10px 0;
+}
+
+.checkbox {
+  width: 26px;
+  height: 26px;
+  accent-color: var(--keyword-color);
+}
+
+.label {
+  width: 100%;
+  font-size: 1.4rem;
+}
+
+.save {
+  width: 160px;
+  height: 52px;
+  margin-top: 20px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 1.3rem;
+  color: white;
+
+  background: linear-gradient(335deg, transparent, rgb(22 187 58 / 85.6%), transparent);
+
+  transition: 0.5s ease;
+}
+
+.save:hover {
+  cursor: pointer;
+  background-color: rgb(20 141 46 / 85.6%);
+}

@@ -1,107 +1,56 @@
-# Rsschool React Course Project
+# Performance
 
-## Technologies
+<p>So I use some optimisation technics and here's the results.
 
-**Framework:** [React](https://react.dev/)
+## First render
 
-**Language:** [TypeScript](https://www.typescriptlang.org/)
+### Before
 
-**Styles:** [CSS](https://www.w3schools.com/css/css_intro.asp)
+<img src="./public/screens/table_load.JPG" />
+<img src="./public/screens/table_load_2.JPG" />
 
-**Bundler:** [Vite](https://vite.dev/)
+### After
 
-**Tests:** [Vitest](https://vitest.dev/)
+<img src="./public/screens/after/table.JPG" />
 
-**API:** [DummyJson](https://dummyjson.com/)
+## Filter by Year
 
-**Code Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+### Before
 
-**Git Hooks:** [Husky](https://typicode.github.io/husky/)
+<img src="./public/screens/years.JPG" />
 
-## Scripts
+### After
 
-Opens the application in the development mode:
+<img src="./public/screens/after/years.JPG" />
 
-```bash
-npm run dev
-```
+## Sort
 
-Creates a build directory with a production build of the application:
+### Before
 
-```bash
-npm run build
-```
+<img src="./public/screens/sort.JPG" />
 
-Allows to preview the production build locally:
+### After
 
-```bash
-npm run preview
-```
+<img src="./public/screens/after/sort.JPG" />
 
-Installs Husky:
+## Search by name
 
-```bash
-npm run prepare
-```
+### Before
 
-Lints the application with ESLint:
+<img src="./public/screens/search.JPG" />
 
-```bash
-npm run lint
-```
+### After
 
-Fixes the linting errors and warnings:
+<img src="./public/screens/after/search.JPG" />
 
-```bash
-npm run lint:fix
-```
+## Add cells to the table
 
-Formats the application with Prettier:
+### Before
 
-```bash
-npm run format:fix
-```
+<img src="./public/screens/add_cells.JPG" />
 
-Checks CSS styles according to Stylelint rules:
+### After
 
-```bash
-npm run check-style
-```
+<img src="./public/screens/after/cells.JPG" />
 
-Fixes CSS styles according to Stylelint rules:
-
-```bash
-npm run fix-style
-```
-
-Checks the files before committing code changes:
-
-```bash
-npm run pre-commit
-```
-
-Runs Vitest tests:
-
-```bash
-npm run test
-```
-
-Reports Vitest tests coverage:
-
-```bash
-npm run coverage
-```
-
-## Set Up
-
-- Clone the repository to your computer using this command:
-
-```bash
-git clone https://github.com/FirstDayAtWork/rss-react-course-projects.git
-```
-
-- Install the dependencies by running the following command:
-
-```bash
-npm install
-```
+<p>So it gets sligtly worse everywhere except Search component! We get 4 rerenders instead of 7! WOWZERS!!! </p>

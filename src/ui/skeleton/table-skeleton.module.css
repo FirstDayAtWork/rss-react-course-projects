@@ -1,0 +1,55 @@
+.skeleton {
+  overflow: hidden;
+  width: 100%;
+  background-color: transparent;
+}
+
+.head {
+  height: 23.5px;
+}
+
+.body {
+  height: 60px;
+}
+
+.head,
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid transparent;
+}
+
+.child {
+  width: 100%;
+  height: 75%;
+  padding: 0 20px;
+  border-radius: 7px;
+
+  background: linear-gradient(90deg, transparent, rgb(72 22 187 / 85.6%), transparent);
+
+  animation-name: flash;
+  animation-duration: 1.2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flash {
+  0% {
+    transform: translateX(-100px);
+    visibility: hidden;
+    opacity: 0.8;
+  }
+
+  90% {
+    transform: translateX(90%);
+    visibility: visible;
+    opacity: 0.9;
+  }
+
+  99.8% {
+    transform: translateX(100%);
+    visibility: visible;
+    opacity: 1;
+  }
+}
